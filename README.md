@@ -148,7 +148,7 @@ npm run build
 - [Vue](https://github.com/vuejs/vue)
 - [Webpack](https://github.com/webpack/webpack)
 
-## 效果展示
+<!-- ## 效果展示
 
 - 响应式布局首页
 ![image](https://github.com/iview/iview-admin/raw/dev/github-gif/home.gif)
@@ -214,4 +214,4 @@ npm run build
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016-present, iView
+Copyright (c) 2016-present, iView -->

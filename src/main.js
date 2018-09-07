@@ -51,5 +51,21 @@ new Vue({
             }
         });
         this.$store.commit('setTagsList', tagsList);
+        // window.addEventListener('beforeunload', function(e){
+        //     let event = e || event
+        //     var n = event.screenX -screenLeft;
+
+        //     var b = n > document.documentElement.scrollWidth - 20;
+        //     console.log('执行了false')
+        //     if (!(b && event.clientY < 0 || event.altKey)) {
+        //         event.returnValue = "真的要刷新页面么？";
+        //         console.log('执行了')
+        //         //这里放置我想执行缓存的代码
+        //         setTimeout(() => {
+        //             alert('离开了');
+        //         }, 100);
+        //         return '离开了'
+        //     }
+        // })
     }
 });
