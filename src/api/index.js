@@ -13,7 +13,7 @@ export default {
 
     login(){//登录
         // return _loginUrlT +'/user-auth/auth/login'
-        return 'http://172.18.101.118:10099/user-oauth2/oauth/token';
+        return 'http://172.18.101.118:10099/platform-user-oauth2/oauth/token';
 
     }, 
 	com_Data(){//元数据
@@ -29,7 +29,7 @@ export default {
 		return _baseUrlQ +'/galaxy/privilege/queryAllDbs?'+"access_token="+Cookies.get('token')
     },
     queryAllUsers(){//用户平台获取用户列表
-        return _baseT +'/user-admin/user/listUserByTenant?'+"access_token="+Cookies.get('token')
+        return _baseT +'/platform-user-admin/user/listUserByTenant?'+"access_token="+Cookies.get('token')
     },
     queryDbPrivilege(){//工作台获取全库权限列表
 		return _baseUrlQ +'/galaxy/privilege/queryDbPrivilege?'+"access_token="+Cookies.get('token')

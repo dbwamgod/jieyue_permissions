@@ -192,7 +192,7 @@ export const appRouter = [
         title: 'HIVE权限管理',
         component: Main,
         children: [
-            { path: 'add-jurisdiction', title: '新增权限', name: 'add-jurisdiction', icon: 'compose', component: () => import('@/views/form/article-publish/article-publish.vue') },
+            { path: 'add-jurisdiction', title: '权限管理', name: 'add-jurisdiction', icon: 'compose', component: () => import('@/views/form/article-publish/article-publish.vue') },
             { path: 'del-jurisdiction', title: '删除权限', name: 'workflow', icon: 'del-jurisdiction', component: () => import('@/views/form/work-flow/work-flow.vue') }
 
         ]
