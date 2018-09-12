@@ -215,7 +215,6 @@ export default {
       });
     },
     onHandChange(data) {
-      console.log(data);
     },
     changepage(index) {
       this.page.pageIndex = index;
@@ -269,7 +268,6 @@ export default {
       });
     },
     addUserModelCancel() {
-      console.log('关闭')
       this.$refs.formValidate.resetFields();
     },
   }

@@ -252,7 +252,6 @@
                     }
 
                 }).then(res => {
-                    console.log(res);
                     if (res.data.code == 200 && res.data.data) {
                         var users = [];
                         res.data.data.forEach(function (e) {
@@ -283,7 +282,6 @@
             onHandChange (data) {
 
                 this.SpinType = true;
-                console.log(data);
                 let params = [];
                 this.queryDbPrivilegeList.map(item => {
                     if (data.indexOf(item.key) > -1) {
@@ -296,7 +294,6 @@
                 this.queryDbPrivilegeList.map(item => {
                     //这里做操作 跟下面一样
                     if (item.flag != this.queryDbPrivilegeOldList[item.key]) {
-                        console.log('成功的', item);
                         params.push({
                             dbName: this.formItem.dbName, //this.formItem.dbName,
                             flag: item.flag,
@@ -379,7 +376,6 @@
                     }
                     this.initList();
                 },err => {
-                    console.log('错误 ')
                     this.SpinType = false;
                     this.$Message.info('网络请求错误');
                     this.initList();
@@ -417,7 +413,6 @@
                         this.dataCount = res.data.page.totalRecords;
                         this.historyOldData = JSON.parse(JSON.stringify(res.data.data));
                         this.SpinType = false;
-                        // console.log(this.historyOldData,222222222222222222222);
 
                     } else {
                         this.SpinType = false;
@@ -456,7 +451,6 @@
                             this.formItem.checkbox.push('updateStatus');
                             this.queryDbPrivilegeList[1].flag = 1;
                         }
-                        console.log(this.formItem.checkbox);
                     }
                 });
             },

@@ -22,7 +22,6 @@
         props: ['option'],
         watch: {
             option: function (val) {
-                console.log('watch', val.seriesData.length);
                 if (!val.seriesData.length) {
 
                     this.isVoid=true;
@@ -36,7 +35,6 @@
         created () {
         },
         mounted () {
-            console.log('mounted', this.option);
             if (!this.echartsOption.seriesData.length) {
 
                 this.isVoid=true;
@@ -80,7 +78,6 @@
                             axisLabel : {
                                 show : true,
                                 formatter:function(value) {
-                                    console.log(value);
                                     return value.split(' ').join("\n");
                                 },
                             },
@@ -106,7 +103,6 @@
                         }
                     ]
                 };
-                console.log('重绘');
                 const serviceRequestCharts = echarts.init(
                     document.getElementById('service_request_con')
                 );

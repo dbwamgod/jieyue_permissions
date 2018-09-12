@@ -274,7 +274,6 @@
                 }
 
             }).then(res => {
-                console.log(res);
                 this.userList = res.data.data.email.split("@")[0];
                 this.dbName = this.userList[0].dbName;
 
@@ -308,7 +307,6 @@
                     }
                 }).then(res => {
                     // let _self=this;
-                    console.log(res);
                     this.dataCount = res.data.page.totalRecords;
                     this.data3 = res.data.data;
                     this.dataDefault = res.data.data;
@@ -396,7 +394,6 @@
                         }
                     ]
                 }).then(res => {
-                    console.log(res);
                 });
             }
         },

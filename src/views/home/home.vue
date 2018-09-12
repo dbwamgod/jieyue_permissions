@@ -193,9 +193,7 @@ export default {
       });
     },
     onHandChange(data) {
-      console.log(data);
       data.key != data.key;
-      console.log(this.roleList, "ddd");
     },
     changepage(index) {
       this.page.pageIndex = index;
