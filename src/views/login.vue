@@ -81,7 +81,7 @@
                                 }
                             }).then(res => {
                                 if (res.status === 200) {
-                                    Cookies.set('user', this.form.userName);
+                                    Cookies.set('userM', this.form.userName);
                                     Cookies.set('password', this.form.password);
                                     Cookies.set('access', 1);
                                     Cookies.set('token', res.data.access_token);
@@ -115,57 +115,12 @@
                                 this.$Message.info('密码和邮箱不匹配');
                             });
 
-                            //   if (this.form.userName === 'iview_admin') {
-                            //       Cookies.set('access', 0);
-                            //   } else {
-                            //       Cookies.set('access', 1);
-                            //   }
-
-                            //   this.$router.push({
-                            //       name: 'home_index'
-                            //   });
-                            //     let postData = this.$qs.stringify({
-                            //       	"pageSize":5,
-                            //       	"pageIndex":1,
-                            //       	appId:'application_1531386611107_0002',
-                            //       	dur:'',
-                            //   	    status:''
-                            //   });
-                            //   this.$axios({
-                            //     method: "post",
-                            //     url: api.getHueAutoLoginUrl(),
-                            //     data: {
-                            //       userName: 'qiyctest2',
-                            //       password: 'qiyctest2'
-                            //     }
-                            //   }).then(res => {
-                            //       console.log('登录',res)
-                            //        Cookies.set('azkaban', res.data.azkaban);
-                            //        Cookies.set('hue', res.data.hue);
-                            //     // console.log(res.data.data)
-                            //     // this.$router.push({
-                            //     //   name: 'home_index'
-                            //     // });
-                            //   });
-
                         }
                     } else {
                         this.$Message.info('邮箱地址格式不对');
                     }
 
-                    // if (valid) {
-                    //     Cookies.set('user', this.form.userName);
-                    //     Cookies.set('password', this.form.password);
-                    //     this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    //     if (this.form.userName === 'user') {
-                    //         Cookies.set('access', 0);
-                    //     } else {
-                    //         Cookies.set('access', 1);
-                    //     }
-                    //     this.$router.push({
-                    //         name: 'home_index'
-                    //     });
-                    // }
+            
                 });
 
                 [
