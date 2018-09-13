@@ -73,7 +73,7 @@
                             fd.append('grant_type', 'password');
 
                             this.$axios({
-                                method: 'post',
+                                method: 'post', 
                                 url: api.login(),
                                 data: fd,
                                 headers: {

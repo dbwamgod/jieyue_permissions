@@ -44,6 +44,14 @@
             权限修改结果：{{item.secrityStatus==1?'成功':'失败'}} </p>
         
     </Modal>
+     <Modal
+        v-model="modal2"
+        title="提示"
+        @on-ok="removetask"
+        @on-cancel="cancel">
+        <p>确定停止该任务？</p>
+  
+    </Modal>
     </div>
 </template>
 <style scoped>
@@ -52,7 +60,8 @@
   margin-top: 10px;
 }
 </style>
-<script>    import Cookies from 'js-cookie';
+<script>
+import Cookies from "js-cookie";
 
 import api from "@/api";
 export default {
@@ -67,6 +76,8 @@ export default {
         pageSize: 10
       },
       SpinType: false,
+      removetaskId:'',
+      modal2:false,
       historyColumns: [
         {
           title: "任务号",
@@ -128,26 +139,13 @@ export default {
                   type: "text",
                   size: "small"
                 },
-                style:{
-                  color:'blue',
+                style: {
+                  color: "blue"
                 },
                 on: {
                   click: (event, data) => {
-                    this.$axios({
-                      method: "get",
-                      url: api.killJob(column.row.id),
-                        headers:{
-                            Authorization:Cookies.get("token"),
-                            'Content-Type': 'application/json;charset=UTF-8'
-                        }
-                    }).then(res => {
-                      if(res.data.code==200){
-                        this.$Message.success("提交成功", 3);
-                      }else{
-                         this.$Message.error("提交成功", 3);
-                      }
-                      
-                    });
+                    this.removetaskId=column.row.id;
+                    this.modal2=true;
                   }
                 }
               },
@@ -161,47 +159,64 @@ export default {
       resModal: false,
       resModalList: [],
       cityList: [
-        {name: "全部",key:-1},
+        { name: "全部", key: -1 },
         { name: "良好", key: 0 },
         { name: "轻微", key: 1 },
         { name: "中度", key: 2 },
         { name: "严重", key: 3 },
-        { name: "预警", key: 4 },
+        { name: "预警", key: 4 }
       ],
       formItem: {
         appId: "",
         dur: "",
-        state: '全部'
+        state: "全部"
       },
-      isNumber: true,
+      isNumber: true
     };
   },
-  computed: { 
+  computed: {
     newArr: function(type) {
-      if (this.formItem.state!=='全部' || this.formItem.appId || this.formItem.dur) {
-        if(this.formItem.state!=='全部'&& this.formItem.appId && this.formItem.dur){
+      if (
+        this.formItem.state !== "全部" ||
+        this.formItem.appId ||
+        this.formItem.dur
+      ) {
+        if (
+          this.formItem.state !== "全部" &&
+          this.formItem.appId &&
+          this.formItem.dur
+        ) {
           return this.historyData.filter(
-              r => r.statusMsg == this.formItem.state && r.id == this.formItem.appId && r.elapsed == this.formItem.dur
-            );
-          }
-        if(this.formItem.state!=='全部'&& this.formItem.appId){
+            r =>
+              r.statusMsg == this.formItem.state &&
+              r.id == this.formItem.appId &&
+              r.elapsed == this.formItem.dur
+          );
+        }
+        if (this.formItem.state !== "全部" && this.formItem.appId) {
           return this.historyData.filter(
-              r => r.statusMsg == this.formItem.state && r.id == this.formItem.appId
-            );
-          }
-         if(this.formItem.appId && this.formItem.dur){
+            r =>
+              r.statusMsg == this.formItem.state && r.id == this.formItem.appId
+          );
+        }
+        if (this.formItem.appId && this.formItem.dur) {
           return this.historyData.filter(
-              r => r.id == this.formItem.appId && r.elapsed == this.formItem.dur
-            );
-          }
-         if(this.formItem.state!=='全部' && this.formItem.dur){
+            r => r.id == this.formItem.appId && r.elapsed == this.formItem.dur
+          );
+        }
+        if (this.formItem.state !== "全部" && this.formItem.dur) {
           return this.historyData.filter(
-              r => r.statusMsg == this.formItem.state  && r.elapsed == this.formItem.dur
-            );
-          }
+            r =>
+              r.statusMsg == this.formItem.state &&
+              r.elapsed == this.formItem.dur
+          );
+        }
         return this.historyData.filter(
-           r => r.statusMsg == this.formItem.state || r.id == this.formItem.appId || r.elapsed == this.formItem.dur
-         );
+          r =>
+            r.statusMsg == this.formItem.state ||
+            r.id == this.formItem.appId ||
+            r.elapsed == this.formItem.dur
+        );
       } else {
         return this.historyData;
       }
@@ -219,17 +234,17 @@ export default {
           pageSize: this.page.pageSize,
           pageIndex: this.page.pageIndex
         },
-          headers:{
-              Authorization:Cookies.get("token"),
-              'Content-Type': 'application/json;charset=UTF-8'
-          }
+        headers: {
+          Authorization: Cookies.get("token"),
+          "Content-Type": "application/json;charset=UTF-8"
+        }
       }).then(res => {
         if (res.data.code == 200) {
-            if(res.data.data  instanceof Array){
-                this.historyData = res.data.data
-            }else{
-                this.historyData = [];
-            }
+          if (res.data.data instanceof Array) {
+            this.historyData = res.data.data;
+          } else {
+            this.historyData = [];
+          }
 
           this.SpinType = false;
         }
@@ -259,23 +274,42 @@ export default {
       this.resModalList = [];
     },
     clickToLog(id) {
-     this.$axios({
+      this.$axios({
         method: "get",
         url: api.getMonitorLog(id),
-         headers:{
-             Authorization:Cookies.get("token"),
-             'Content-Type': 'application/json;charset=UTF-8'
-         }
+        headers: {
+          Authorization: Cookies.get("token"),
+          "Content-Type": "application/json;charset=UTF-8"
+        }
       }).then(res => {
         if (res.data.code == 200) {
-          let url=res.data.data.amContainerLogs;
-          if(url){
-           window.open(`${url}`, '_blank');
-          }else{
-             this.$Message.error("暂无数据", 3);
+          let url = res.data.data.amContainerLogs;
+          if (url) {
+            window.open(`${url}`, "_blank");
+          } else {
+            this.$Message.error("暂无数据", 3);
           }
-        } 
+        }
       });
+    },
+    removetask() {
+      this.$axios({
+        method: "get",
+        url: api.killJob(this.removetaskId),
+        headers: {
+          Authorization: Cookies.get("token"),
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }).then(res => {
+        if (res.data.code == 200) {
+          this.$Message.success("提交成功", 3);
+        } else {
+          this.$Message.error("提交成功", 3);
+        }
+      });
+    },
+    cancel() {
+      this.modal2=false;
     }
   }
 };
