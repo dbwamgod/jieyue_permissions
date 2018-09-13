@@ -17,7 +17,7 @@
 
                 <Col span="5">
                 <Form-item label="用户名：">
-                    <Select v-model="formItem.userName" placeholder="请选择" @change="dbNameSelectChange">
+                    <Select v-model="formItem.userName" placeholder="请选择" @on-change="dbNameSelectChange">
                         <Option v-for="item in userList" :value="item||''" :key="item">{{ item}}</Option>
                     </Select>
                 </Form-item>
