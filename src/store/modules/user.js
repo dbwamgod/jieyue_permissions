@@ -5,8 +5,7 @@ const user = {
     mutations: {
         logout (state, vm) {
             Cookies.remove('userM');
-            Cookies.remove('password');
-
+            Cookies.remove('passwordM');
             Cookies.remove('access');
             Cookies.remove('azkaban');
             Cookies.remove('token');

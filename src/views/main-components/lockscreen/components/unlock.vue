@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         validator () {
-            if(this.password===Cookies.get('password')){
+            if(this.password===Cookies.get('passwordM')){
                 return true;
             }else {
                 return false
