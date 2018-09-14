@@ -16,7 +16,7 @@
                         <!--<img v-show="!shrink"  src="../images/logo.jpg" key="max-logo" />
                         <img v-show="shrink" src="../images/logo-min.jpg" key="min-logo" />-->
 
-                        <h2>银河管理平台</h2>
+                        <h2 style="color:#fff">银河管理平台</h2>
                     </div>
                 </shrinkable-menu>
             </scroll-bar>
