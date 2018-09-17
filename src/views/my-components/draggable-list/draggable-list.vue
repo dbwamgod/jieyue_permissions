@@ -65,8 +65,6 @@
                     {
                         title: '入参',
                         key: 'inParam',
-                        width: '140px',
-
                         render: (h, params) => {
                             return h('Tooltip', {
                                 style: {
@@ -89,7 +87,6 @@
                     {
                         title: '出参',
                         key: 'outParam',
-                        width: '140px',
                         render: (h, params) => {
                             return h('Tooltip', {
                                 style: {
@@ -110,7 +107,9 @@
                     },
                     {
                         title: '创建人id',
-                        key: 'creator'
+                        key: 'creator',
+                        minWidth:60,
+                        maxWidth: 100,
                     },
                     {
                         title: '创建时间',

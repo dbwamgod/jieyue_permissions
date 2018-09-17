@@ -74,7 +74,9 @@ export default {
         },
         {
           title: "用户",
-          key: "user"
+          key: "user",
+            minWidth:60,
+          maxWidth: 80,
         },
         {
           title: "任务名称",
@@ -93,24 +95,35 @@ export default {
         {
           title: "耗时(分钟)",
           key: "dur",
+          minWidth:60,
+          maxWidth: 100,
         },
         {
           title: "队列",
           key: "queue",
+           maxWidth: 200,
         },
         {
           title: "状态",
           key: "state",
+           minWidth:60,
+          maxWidth: 80,
         },
         {
           title: "日志",
           key: "updateStatus",
+           minWidth:40,
+          maxWidth: 60,
            render: (row, column, index) => {
-            return row("Button", {
+            return row("p", {
              props: {
                 type: "text",
                 size: "small",
               },
+              style:{
+                  cursor: 'pointer',
+                   color:'blue'
+                },
               on: {
                 "click": (event, data) => {
                 this.clickToLog(column.row.appId)
@@ -122,12 +135,18 @@ export default {
         {
           title: "优化",
           key: "deletetStatus",
+          minWidth:40,
+          maxWidth: 60,
           render: (row, column, index) => {
-            return row("Button", {
+            return row("p", {
               props: {
                 type: "text",
                 size: "small",
               },
+              style:{
+                  cursor: 'pointer',
+                  color:'blue'
+                },
               on: {
                 "click": (event, data) => {
                   window.open(api.getSearch(column.row.appId),'_blank')

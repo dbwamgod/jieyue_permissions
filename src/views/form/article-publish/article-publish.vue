@@ -233,7 +233,7 @@
         },
         methods: {
             init () {
-
+                console.log('init================')
                 this.$axios({
                     method: 'post',
                     url: api.queryAllUsers(),
@@ -280,7 +280,7 @@
                 });
             },
             onHandChange (data) {
-
+                console.log('全库查询')
                 this.SpinType = true;
                 let params = [];
                 this.queryDbPrivilegeList.map(item => {
@@ -325,6 +325,7 @@
             },
             changepage (index) {
                 this.page.pageIndex = index;
+                console.log('翻页')
                 this.initList();
             },
             submit () {
@@ -390,6 +391,8 @@
             },
             initList () {
                 this.SpinType = true;
+               
+                console.log('initlist============')
                 this.$axios({
                     //列表
                     method: 'post',
@@ -455,6 +458,7 @@
                 });
             },
             dbNameSelectChange () {
+                console.log('用户名字');
                 this.formItem.tableName = '';
                 this.initList();
             },

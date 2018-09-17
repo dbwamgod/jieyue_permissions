@@ -85,7 +85,9 @@ export default {
         },
         {
           title: "用户",
-          key: "user"
+          key: "user",
+          minWidth:60,
+          maxWidth: 120,
         },
         {
           title: "任务名称",
@@ -97,26 +99,37 @@ export default {
         },
         {
           title: "耗时(分钟)",
-          key: "elapsed"
+          key: "elapsed",
+          minWidth:60,
+          maxWidth: 120,
         },
         {
           title: "队列",
-          key: "queue"
+          key: "queue",
+          maxWidth: 200,
         },
         {
           title: "状态",
-          key: "statusMsg"
+          key: "statusMsg",
+          minWidth:40,
+          maxWidth: 60,
         },
         {
           title: "日志",
           key: "updateStatus",
+          minWidth:40,
+          maxWidth: 60,
           render: (row, column, index) => {
             return row(
-              "Button",
+              "p",
               {
                 props: {
                   type: "text",
                   size: "small"
+                },
+                style:{
+                  cursor: 'pointer',
+                  color: "blue",
                 },
                 on: {
                   click: (event, data) => {
@@ -131,16 +144,19 @@ export default {
         {
           title: "操作",
           key: "deletetStatus",
+          minWidth:40,
+          maxWidth: 60,
           render: (row, column, index) => {
             return row(
-              "Button",
+              "p",
               {
                 props: {
                   type: "text",
                   size: "small"
                 },
                 style: {
-                  color: "blue"
+                  color: "blue",
+                  cursor: 'pointer',
                 },
                 on: {
                   click: (event, data) => {
