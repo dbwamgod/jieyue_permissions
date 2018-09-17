@@ -18,12 +18,12 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: './',  // 修改 https://iv...admin 这部分为你的服务器域名
+        publicPath: 'http://api.bdc.jieyue.com/platform_party/',  // 修改 https://iv...admin 这部分为你的服务器域名
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
     plugins: [
-        new cleanWebpackPlugin(['dist/*'], {
+        new cleanWebpackPlugin(['platform_party/*'], {
             root: path.resolve(__dirname, '../')
         }),
         new ExtractTextPlugin({
