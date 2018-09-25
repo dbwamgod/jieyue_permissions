@@ -158,7 +158,7 @@ export const appRouter = [
                 path: 'task-dispatch',
                 icon: 'android-upload',
                 name: 'task-dispatch',
-                title: '任务调度',
+                title: 'azkaban',
                 component: () => import('@/views/my-components/file-upload/file-upload.vue')
             },
             // {
