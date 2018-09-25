@@ -3,7 +3,6 @@
 
 //生产环境
 
-
 const _baseUrlQ = 'http://api.bdc.jieyue.com/api/galaxy-platform-management';
 const _baseT = 'http://api.bdc.jieyue.com/api';
 import Cookies from "js-cookie"

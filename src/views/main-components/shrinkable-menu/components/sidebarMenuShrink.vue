@@ -52,7 +52,7 @@
                 <Dropdown transfer  placement="right-start" :key="3" @on-click="changeMenu">
                     <Button style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
                         <!-- <Icon :size="20" :color="iconColor" :type="item.icon"></Icon> -->
-                        <Icon type="filing" :size='20' color="#fff"></Icon>
+                        <Icon type="social-codepen" :size='20' color="#fff"></Icon>
                     </Button>
                     <DropdownMenu style="width: 200px;" slot="list">
                         <DropdownItem name="add-jurisdiction" key="3-1"><span style="padding-left:10px;">HIVE权限管理</span></DropdownItem>
