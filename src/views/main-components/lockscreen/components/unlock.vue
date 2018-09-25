@@ -28,6 +28,7 @@
 
 <script>
 import Cookies from "js-cookie";
+import api from '@/api'
 export default {
   name: "Unlock",
   data() {
@@ -91,17 +92,15 @@ export default {
       this.$refs.inputEle.focus();
     },
     handleUnlock() {
-      if (this.validator()) {
+     this.validator().then(res=>{
         this.avatorLeft = "0px";
         this.inputLeft = "400px";
         this.password = "";
         Cookies.set("locking", "0");
         this.$emit("on-unlock");
-      } else {
-        this.$Message.error(
-          "密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可"
-        );
-      }
+       },err=>{
+             this.$Message.error("密码错误,请重新输入。如果忘了密码，清除浏览器缓存重新登录即可");
+       });
     },
     unlockMousedown() {
       this.$refs.unlockBtn.className = "unlock-btn click-unlock-btn";
