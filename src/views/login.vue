@@ -82,7 +82,6 @@
                             }).then(res => {
                                 if (res.status === 200) {
                                     Cookies.set('userM', this.form.userName);
-                                    Cookies.set('passwordM', this.form.password);
                                     Cookies.set('access', 1);
                                     Cookies.set('token', res.data.access_token);
                                     this.$store.commit('addOpenSubmenu', '2-1');
