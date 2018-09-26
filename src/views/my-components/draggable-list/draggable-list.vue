@@ -159,6 +159,7 @@
                 this.init();
             },
             submit () {
+                this.page.pageIndex=1;
                 this.init();
             }
         }

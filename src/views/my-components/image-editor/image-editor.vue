@@ -221,6 +221,7 @@ export default {
           this.status=this.formItem.state,
           this.dur=this.formItem.dur||'',
         this.SpinType=true;
+        this.page.pageIndex=1;
         this.init();
       }else{
         this.$Message.error("请填写整数", 3);

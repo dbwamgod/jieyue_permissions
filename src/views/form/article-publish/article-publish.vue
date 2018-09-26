@@ -9,7 +9,7 @@
             <Input v-model="formItem.tableName" placeholder="请输入表名"></Input>
             </Col>
             <Col span="4">
-            <Button type="primary" @click='initList'>搜索</Button>
+            <Button type="primary" @click='search'>搜索</Button>
             </Col>
         </Row>
         <Form :model="formItem" :label-width="60">
@@ -233,7 +233,6 @@
         },
         methods: {
             init () {
-                console.log('init================')
                 this.$axios({
                     method: 'post',
                     url: api.queryAllUsers(),
@@ -279,8 +278,13 @@
                     }
                 });
             },
+            search() {
+                // this.formItem.userName='';
+                // this.formItem.dbName='';
+                this.page.pageIndex=1;
+                this.initList();
+            },
             onHandChange (data) {
-                console.log('全库查询')
                 this.SpinType = true;
                 let params = [];
                 this.queryDbPrivilegeList.map(item => {
@@ -325,7 +329,6 @@
             },
             changepage (index) {
                 this.page.pageIndex = index;
-                console.log('翻页')
                 this.initList();
             },
             submit () {
@@ -391,8 +394,6 @@
             },
             initList () {
                 this.SpinType = true;
-               
-                console.log('initlist============')
                 this.$axios({
                     //列表
                     method: 'post',
@@ -458,7 +459,6 @@
                 });
             },
             dbNameSelectChange () {
-                console.log('用户名字');
                 this.formItem.tableName = '';
                 this.initList();
             },
