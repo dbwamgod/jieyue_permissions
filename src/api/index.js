@@ -1,10 +1,10 @@
-const _baseUrlQ = 'http://172.18.101.118:10000/galaxy-platform-management';
-const _baseT='http://172.18.101.118:10000';
+// const _baseUrlQ = 'http://172.18.101.118:10000/galaxy-platform-management';
+// const _baseT='http://172.18.101.118:10000';
 
 //生产环境
 
-// const _baseUrlQ = 'http://api.bdc.jieyue.com/api/galaxy-platform-management';
-// const _baseT = 'http://api.bdc.jieyue.com/api';
+const _baseUrlQ = 'http://api.bdc.jieyue.com/api/galaxy-platform-management';
+const _baseT = 'http://api.bdc.jieyue.com/api';
 import Cookies from "js-cookie"
 export default {
 	_baseUrlQ,
@@ -57,8 +57,8 @@ export default {
 		return _baseUrlQ +'/galaxy/user/killJob/'+id+"?"+"access_token="+Cookies.get('token')
 	},
 	getSearch(id){//获取作业优化
-		return 'http://172.18.101.132:8080/search?id='+id+"&"+"access_token="+Cookies.get('token');// 测试
-		// return 'http://10.50.192.58:8080/search?id='+id+"&"+"access_token="+Cookies.get('token');
+		// return 'http://172.18.101.132:8080/search?id='+id+"&"+"access_token="+Cookies.get('token');// 测试
+		return 'http://10.50.192.58:8080/search?id='+id+"&"+"access_token="+Cookies.get('token');
 	},
 	getWarnList(){//作业预警
 		return _baseUrlQ +'/galaxy/work/getWarnList?'+"access_token="+Cookies.get('token')
