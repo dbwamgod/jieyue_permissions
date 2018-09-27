@@ -119,7 +119,7 @@
 
         },
         created () {
-            this.act_name = localStorage.getItem(`pagesT`)?localStorage.getItem(`pagesT`):"2-1";
+            this.act_name = sessionStorage.getItem(`pagesT`)?sessionStorage.getItem(`pagesT`):"2-1";
 
             //this.act_name=this.openNames[1];
             // this.activeName = Cookies.get('pages');
@@ -146,7 +146,7 @@
             // }
             menuSelect (name) {
 
-                localStorage.setItem(`pagesT`,`${name}`);
+                sessionStorage.setItem(`pagesT`,`${name}`);
                 this.$store.commit('addOpenSubmenu', name);
                 //  console.log('side', this.openNames, this.$route.name);
                 // console.log('=1=1=1=1=1=11==1=11==',data,row,index)

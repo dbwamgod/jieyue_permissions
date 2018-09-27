@@ -13,7 +13,7 @@ const user = {
             Cookies.remove('PLAY_SESSION');
             Cookies.remove('hue');
             Cookies.remove('spark.submit');
-            localStorage.removeItem(`pages`);
+            sessionStorage.removeItem(`pagesT`);
 
             // 恢复默认样式
             let themeLink = document.querySelector('link[name="theme"]');

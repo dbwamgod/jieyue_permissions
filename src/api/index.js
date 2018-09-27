@@ -1,10 +1,10 @@
-const _baseUrlQ = 'http://172.18.101.118:10000/galaxy-platform-management';
-const _baseT='http://172.18.101.118:10000';
+// const _baseUrlQ = 'http://172.18.101.118:10000/galaxy-platform-management';
+// const _baseT='http://172.18.101.118:10000';
 
 //生产环境
 
-// const _baseUrlQ = 'http://api.bdc.jieyue.com/api/galaxy-platform-management';
-// const _baseT = 'http://api.bdc.jieyue.com/api';
+const _baseUrlQ = 'http://api.bdc.jieyue.com/api/galaxy-platform-management';
+const _baseT = 'http://api.bdc.jieyue.com/api';
 import Cookies from "js-cookie"
 export default {
 	_baseUrlQ,
