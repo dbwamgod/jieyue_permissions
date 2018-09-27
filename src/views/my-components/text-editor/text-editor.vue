@@ -127,7 +127,7 @@ export default {
                 method: 'get',
                 url: api.getHostHisInformations(this.filterDate),
                 headers: {
-                    Authorization: Cookies.get('token'),
+                    Authorization: Cookies.get('tokenY'),
                     'Content-Type': 'application/json;charset=UTF-8'
                 }
             }).then(res => {
@@ -175,7 +175,7 @@ export default {
                 method: 'get',
                 url: api.getHostInformations(),
                 headers: {
-                    Authorization: Cookies.get('token'),
+                    Authorization: Cookies.get('tokenY'),
                     'Content-Type': 'application/json;charset=UTF-8'
                 }
             }).then(res => {

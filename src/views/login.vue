@@ -83,13 +83,12 @@
                                 if (res.status === 200) {
                                     Cookies.set('userM', this.form.userName);
                                     Cookies.set('access', 1);
-                                    Cookies.set('token', res.data.access_token);
+                                    Cookies.set('tokenY', res.data.access_token);
                                     this.$store.commit('addOpenSubmenu', '2-1');
-                                    // this.$store.commit('addOpenSubmenu', '2-1');
                                     this.$store.commit('setAvator', require('@/images/u=3448484253,3685836170&fm=27&gp=0.jpg'));
                                     this.$axios({//银河平台 if 页面
                                         method: 'post',
-                                        url: api.getHueAutoLoginUrl(Cookies.get('token')),
+                                        url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
                                         data: {
                                             // userName: '1578326883@qq.com',
                                             // pswd: '111111',

@@ -246,7 +246,7 @@
                         tenantId: 1
                     },
                     headers: {
-                        Authorization: Cookies.get('token'),
+                        Authorization: Cookies.get('tokenY'),
                         'Content-Type': 'application/json;charset=UTF-8'
                     }
 
@@ -267,7 +267,7 @@
                     method: 'get',
                     url: api.queryAllDbs(),
                     headers: {
-                        Authorization: Cookies.get('token'),
+                        Authorization: Cookies.get('tokenY'),
                         'Content-Type': 'application/json;charset=UTF-8'
                     }
                 }).then(res => {
@@ -313,7 +313,7 @@
                     url: api.changeUsePrivilege(),
                     data: params,
                     headers: {
-                        // Authorization: Cookies.get('token'),
+                        // Authorization: Cookies.get('tokenY'),
                     }
                 }).then(res => {
                     if (res.data.code == 200) {
@@ -364,7 +364,7 @@
                     url: api.changeUsePrivilege(),
                     data: params,
                     headers: {
-                        Authorization: Cookies.get('token'),
+                        Authorization: Cookies.get('tokenY'),
                         'Content-Type': 'application/json;charset=UTF-8'
                     }
                 }).then(res => {
@@ -408,7 +408,7 @@
                         pageSize: this.page.pageSize
                     },
                     headers: {
-                        Authorization: Cookies.get('token'),
+                        Authorization: Cookies.get('tokenY'),
                         'Content-Type': 'application/json;charset=UTF-8'
                     }
                 }).then(res => {
@@ -432,7 +432,7 @@
                         dbName: this.formItem.dbName
                     },
                     headers: {
-                        Authorization: Cookies.get('token'),
+                        Authorization: Cookies.get('tokenY'),
                         'Content-Type': 'application/json;charset=UTF-8'
                     }
                 }).then(res => {

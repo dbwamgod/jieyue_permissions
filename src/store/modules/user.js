@@ -8,12 +8,12 @@ const user = {
             Cookies.remove('passwordM');
             Cookies.remove('access');
             Cookies.remove('azkaban');
-            Cookies.remove('token');
+            Cookies.remove('tokenY');
             Cookies.remove('userId');
             Cookies.remove('PLAY_SESSION');
             Cookies.remove('hue');
             Cookies.remove('spark.submit');
-            localStorage.removeItem(`pages`)
+            localStorage.removeItem(`pages`);
 
             // 恢复默认样式
             let themeLink = document.querySelector('link[name="theme"]');
