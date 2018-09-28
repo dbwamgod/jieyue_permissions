@@ -206,6 +206,8 @@ export default {
           this.dataCount=res.data.page.totalRecords;
            this.SpinType=false;
         } 
+      },err=>{
+         this.$Message.error('网络错误', 3);
       });
     },
     onHandChange(data) {
