@@ -177,6 +177,7 @@ export default {
       appId:'',
       dur:'',
       state:0,
+      paramInfo:{},
     
     };
   },
@@ -186,6 +187,7 @@ export default {
   },
   methods: {
     init() {
+      console.log('init',this.screenKey('finishTime'))
       this.$axios({
         method: "post",
         url: api.getMonitorList(),
@@ -195,6 +197,11 @@ export default {
           dur:this.dur||'',
           pageSize:this.page.pageSize,
           pageIndex:this.page.pageIndex,
+          searchAfterVo:{
+            pageIndex:this.screenKey('finishTime')[1],
+            finishTime:this.screenKey('finishTime')[0],
+            appId:this.screenKey("appId")[0]
+          }
         },
           headers:{
               Authorization:Cookies.get("token"),
@@ -204,7 +211,8 @@ export default {
         if (res.data.code == 200) {
           this.historyData=res.data.data;
           this.dataCount=res.data.page.totalRecords;
-           this.SpinType=false;
+          this.SpinType=false;
+          this.paramInfo[this.page.pageIndex]=res.data.data[this.historyData.length-1]
         } 
       },err=>{
          this.$Message.error('网络错误', 3);
@@ -212,6 +220,11 @@ export default {
     },
     onHandChange(data) {
    
+    },
+    screenKey(type) {
+      let  keyS = Object.keys(this.paramInfo).filter(r=>r<=this.page.pageIndex);
+      let keysIndex=keyS[keyS.length-1];
+     return this.paramInfo[keysIndex]?[this.paramInfo[keysIndex][type],keysIndex]:[];
     },
     changepage(index) {
       this.page.pageIndex=index;
