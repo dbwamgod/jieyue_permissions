@@ -29,7 +29,7 @@
 </style>
 <script>
     import Cookies from 'js-cookie';
-
+    import util from '@/libs/util';
     import api from '@/api';
 
     export default {
@@ -113,7 +113,10 @@
                     },
                     {
                         title: '创建时间',
-                        key: 'createTime'
+                        key: 'createTime',
+                        render: (h, params) => {
+                            return util.getStringTime(new Date(params.row.createTime))
+                        }
                     }
                 ],
                 historyData: [],
