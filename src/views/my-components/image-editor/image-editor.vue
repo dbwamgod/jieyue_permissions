@@ -105,7 +105,7 @@ export default {
           minWidth:60,
           maxWidth: 100,
            render:(row, params) =>{
-           return (params.row.durTime/(60*1000)).toFixed(1);
+           return Number((params.row.durTime/(60*1000)).toFixed(1));
           }
         },
         {
