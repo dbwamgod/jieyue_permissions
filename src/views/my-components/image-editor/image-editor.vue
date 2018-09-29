@@ -31,7 +31,7 @@
     </Row>
     </Form>
       <Table :columns="historyColumns" :data="historyData" ></Table>
-      <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging" @on-change="changepage"></Page>
+      <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-elevator class="paging" @on-change="changepage"></Page>
       <Modal
         v-model="resModal"
         title="返回结果"
@@ -52,8 +52,9 @@
  
 }
 </style>
-<script>    import Cookies from 'js-cookie';
-
+<script>    
+import Cookies from 'js-cookie';
+import util from '@/libs/util'
 import api from "@/api";
 export default {
   data() {
@@ -85,18 +86,27 @@ export default {
         },
         {
           title: "开始时间",
-          key: "start",
+          key: "startTime",
+          render:(row, params) =>{
+           return  util.getStringTime(new Date(params.row.startTime));
+          }
           
         },
         {
           title: "结束时间",
-          key: "finish",
+          key: "finishTime",
+          render:(row, params) =>{
+           return  util.getStringTime(new Date(params.row.finishTime));
+          }
         },
         {
           title: "耗时(分钟)",
-          key: "dur",
+          key: "durTime",
           minWidth:60,
           maxWidth: 100,
+           render:(row, params) =>{
+           return (params.row.durTime/(60*1000)).toFixed(1);
+          }
         },
         {
           title: "队列",
@@ -213,6 +223,8 @@ export default {
           this.dataCount=res.data.page.totalRecords;
           this.SpinType=false;
           this.paramInfo[this.page.pageIndex]=res.data.data[this.historyData.length-1]
+        }else{
+           this.$Message.error(res.data.msg, 3);
         } 
       },err=>{
          this.$Message.error('网络错误', 3);
@@ -222,11 +234,12 @@ export default {
    
     },
     screenKey(type) {
-      let  keyS = Object.keys(this.paramInfo).filter(r=>r<=this.page.pageIndex);
+      let  keyS = Object.keys(this.paramInfo).filter(r=>r<this.page.pageIndex);
       let keysIndex=keyS[keyS.length-1];
      return this.paramInfo[keysIndex]?[this.paramInfo[keysIndex][type],keysIndex]:[];
     },
     changepage(index) {
+      console.log(index)
       this.page.pageIndex=index;
       this.init();
     },
