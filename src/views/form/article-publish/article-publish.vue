@@ -256,6 +256,7 @@
                         res.data.data.forEach(function (e) {
                             users.push(e.email.split('@')[0]);
                         });
+                        
                         this.userList = users;
                         if (users.length > 0) {
                             this.formItem.userName = users[0];

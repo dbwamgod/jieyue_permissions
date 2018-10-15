@@ -193,7 +193,7 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'add-jurisdiction', title: '权限管理', name: 'add-jurisdiction', icon: 'compose', component: () => import('@/views/form/article-publish/article-publish.vue') },
-            { path: 'del-jurisdiction', title: '删除权限', name: 'workflow', icon: 'del-jurisdiction', component: () => import('@/views/form/work-flow/work-flow.vue') }
+            { path: 'del-jurisdiction', title: '批量管理', name: 'workflow', icon: 'del-jurisdiction', component: () => import('@/views/form/work-flow/work-flow.vue') }
 
         ]
     },

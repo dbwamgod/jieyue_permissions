@@ -1,5 +1,5 @@
 <style lang="less">
-    @import "../styles/menu.less";
+@import "../styles/menu.less";
 </style>
 
 <template>
@@ -87,89 +87,93 @@
                     权限管理
                 </router-link>
             </MenuItem>
+            <MenuItem name="4-2" style="padding: 0;">
+                <router-link tag="li" to="/jurisdiction/del-jurisdiction" style="    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;">
+                    批量管理
+                </router-link>
+            </MenuItem>
         </Submenu>
     </Menu>
 </template>
 
 <script>
-
-
-    export default {
-        name: 'sidebarMenu',
-        data () {
-            return {
-                act_name: '2-1'
-            };
-        },
-        props: {
-            menuList: Array,
-            iconSize: Number,
-            menuTheme: {
-                type: String,
-                default: 'dark'
-            },
-            openNames: {
-                type: Array
-            }
-        },
-        mounted () {
-            // console.log('side', this.openNames, this.$route.name);
-            // this.act_name = this.openNames[1];
-            // console.log(this.$route, this.act_name);
-
-        },
-        created () {
-            this.act_name = sessionStorage.getItem(`pagesT`)?sessionStorage.getItem(`pagesT`):"2-1";
-
-            //this.act_name=this.openNames[1];
-            // this.activeName = Cookies.get('pages');
-
-        },
-        methods: {
-
-            // changeMenu (active) {
-            //     this.$emit('on-change', active);
-            //      console.log('=1=1=1=1=1=11==1=11==',active)
-            //     // if(this.openNames.indexOf(data)>-1){
-            //     //     this.openNames.remove(data)
-            //     // }else{
-            //     //     this.openNames.push(data)
-            //     // }
-            //     console.log(this.openNames)
-            // },
-            // itemTitle (item) {
-            //     if (typeof item.title === 'object') {
-            //         return this.$t(item.title.i18n);
-            //     } else {
-            //         return item.title;
-            //     }
-            // }
-            menuSelect (name) {
-
-                sessionStorage.setItem(`pagesT`,`${name}`);
-                this.$store.commit('addOpenSubmenu', name);
-                //  console.log('side', this.openNames, this.$route.name);
-                // console.log('=1=1=1=1=1=11==1=11==',data,row,index)
-                // if(this.openNames.indexOf(data)>-1){
-                //     this.openNames.remove(data)
-                // }else{
-                //     this.openNames.push(data)
-                // }
-                // console.log(this.openNames)
-            }
-        },
-        updated () {
-            this.$nextTick(() => {
-                if (this.$refs.sideMenu) {
-                    this.$refs.sideMenu.updateOpened();
-                }
-            });
-        }
+export default {
+  name: "sidebarMenu",
+  data() {
+    return {
+      act_name: "2-1"
     };
+  },
+  props: {
+    menuList: Array,
+    iconSize: Number,
+    menuTheme: {
+      type: String,
+      default: "dark"
+    },
+    openNames: {
+      type: Array
+    }
+  },
+  mounted() {
+    // console.log('side', this.openNames, this.$route.name);
+    // this.act_name = this.openNames[1];
+    // console.log(this.$route, this.act_name);
+  },
+  created() {
+    this.act_name = sessionStorage.getItem(`pagesT`)
+      ? sessionStorage.getItem(`pagesT`)
+      : "2-1";
+
+    //this.act_name=this.openNames[1];
+    // this.activeName = Cookies.get('pages');
+  },
+  methods: {
+    // changeMenu (active) {
+    //     this.$emit('on-change', active);
+    //      console.log('=1=1=1=1=1=11==1=11==',active)
+    //     // if(this.openNames.indexOf(data)>-1){
+    //     //     this.openNames.remove(data)
+    //     // }else{
+    //     //     this.openNames.push(data)
+    //     // }
+    //     console.log(this.openNames)
+    // },
+    // itemTitle (item) {
+    //     if (typeof item.title === 'object') {
+    //         return this.$t(item.title.i18n);
+    //     } else {
+    //         return item.title;
+    //     }
+    // }
+    menuSelect(name) {
+      sessionStorage.setItem(`pagesT`, `${name}`);
+      this.$store.commit("addOpenSubmenu", name);
+      //  console.log('side', this.openNames, this.$route.name);
+      // console.log('=1=1=1=1=1=11==1=11==',data,row,index)
+      // if(this.openNames.indexOf(data)>-1){
+      //     this.openNames.remove(data)
+      // }else{
+      //     this.openNames.push(data)
+      // }
+      // console.log(this.openNames)
+    }
+  },
+  updated() {
+    this.$nextTick(() => {
+      if (this.$refs.sideMenu) {
+        this.$refs.sideMenu.updateOpened();
+      }
+    });
+  }
+};
 </script>
 <style>
-    router-link {
-        color: white;
-    }
+router-link {
+  color: white;
+}
 </style>
 
