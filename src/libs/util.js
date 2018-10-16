@@ -272,11 +272,28 @@ util.checkUpdate = function (vm) {
 util.getStringTime = function (date) {
     const newDate = `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1}-${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()} ${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}:${date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()}`;
 
-return newDate;
+    return newDate;
 };
 util.getStringTimeT = function (date) {
-const newDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`;
+    const newDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} 00:00:00`;
 
-return newDate;
+    return newDate;
+};
+util.uniq = function (array) {
+    var temp = [];
+    var index = [];
+    var l = array.length;
+        for (var i = 0; i < l; i++) {
+        for (var j = i + 1; j < l; j++) {
+            if (array[i] === array[j]) {
+                i++;
+                j = i;
+            }
+        }
+        temp.push(array[i]);
+        index.push(i);
+    }
+
+    return temp;
 };
 export default util;

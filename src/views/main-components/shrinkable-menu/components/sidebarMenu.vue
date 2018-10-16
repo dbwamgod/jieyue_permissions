@@ -1,5 +1,5 @@
 <style lang="less">
-    @import "../styles/menu.less";
+@import "../styles/menu.less";
 </style>
 
 <template>
@@ -87,12 +87,19 @@
                     权限管理
                 </router-link>
             </MenuItem>
+            <MenuItem name="4-2" style="padding: 0;">
+                <router-link tag="li" to="/jurisdiction/del-jurisdiction" style="    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;">
+                    批量管理
+                </router-link>
+            </MenuItem>
         </Submenu>
     </Menu>
 </template>
 
 <script>
-
 
     export default {
         name: 'sidebarMenu',
@@ -266,11 +273,13 @@
                 }
             });
         }
+
     };
+
 </script>
 <style>
-    router-link {
-        color: white;
-    }
+router-link {
+  color: white;
+}
 </style>
 

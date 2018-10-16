@@ -100,25 +100,25 @@
                         render: (row, column, index) => {
 
                             // if(!this.historyData[0].tableName){
-                                let value = column.row.selectStatus == 1;
-                                return row('Checkbox', {
-                                    props: {
-                                        type: 'Checkbox',
-                                        size: 'small',
-                                        rowIndex: column.index,
-                                        disabled: column.row.allStatusDisableds,
-                                        value
-                                    },
-                                    on: {
-                                        'on-change': (event, data) => {
-                                            this.historyData[column.index].selectStatus =
-                                                column.row.selectStatus == 1 ? 0 : 1;
-                                            column.row.selectStatus =
-                                                column.row.selectStatus == 1 ? 0 : 1;
-                                        }
+                            let value = column.row.selectStatus == 1;
+                            return row('Checkbox', {
+                                props: {
+                                    type: 'Checkbox',
+                                    size: 'small',
+                                    rowIndex: column.index,
+                                    disabled: column.row.allStatusDisableds,
+                                    value
+                                },
+                                on: {
+                                    'on-change': (event, data) => {
+                                        this.historyData[column.index].selectStatus =
+                                            column.row.selectStatus == 1 ? 0 : 1;
+                                        column.row.selectStatus =
+                                            column.row.selectStatus == 1 ? 0 : 1;
                                     }
-                                });
-                             // }
+                                }
+                            });
+                            // }
 
                         }
                     },
@@ -127,24 +127,24 @@
                         key: 'insertStatus',
                         render: (row, column, index) => {
                             // if(!historyData[0].tableName) {
-                                let value = column.row.insertStatus == 1;
-                                return row('Checkbox', {
-                                    props: {
-                                        type: 'Checkbox',
-                                        size: 'small',
-                                        rowIndex: column.index,
-                                        disabled: column.row.allStatusDisableds,
-                                        value
-                                    },
-                                    on: {
-                                        'on-change': (event, data) => {
-                                            this.historyData[column.index].insertStatus =
-                                                column.row.insertStatus == 1 ? 0 : 1;
-                                            column.row.insertStatus =
-                                                column.row.insertStatus == 1 ? 0 : 1;
-                                        }
+                            let value = column.row.insertStatus == 1;
+                            return row('Checkbox', {
+                                props: {
+                                    type: 'Checkbox',
+                                    size: 'small',
+                                    rowIndex: column.index,
+                                    disabled: column.row.allStatusDisableds,
+                                    value
+                                },
+                                on: {
+                                    'on-change': (event, data) => {
+                                        this.historyData[column.index].insertStatus =
+                                            column.row.insertStatus == 1 ? 0 : 1;
+                                        column.row.insertStatus =
+                                            column.row.insertStatus == 1 ? 0 : 1;
                                     }
-                                });
+                                }
+                            });
                             // }
                         }
                     },
@@ -153,24 +153,24 @@
                         key: 'updateStatus',
                         render: (row, column, index) => {
                             // if(!historyData[0].tableName) {
-                                let value = column.row.updateStatus == 1;
-                                return row('Checkbox', {
-                                    props: {
-                                        type: 'Checkbox',
-                                        size: 'small',
-                                        rowIndex: column.index,
-                                        disabled: column.row.allStatusDisableds,
-                                        value
-                                    },
-                                    on: {
-                                        'on-change': (event, data) => {
-                                            this.historyData[column.index].updateStatus =
-                                                column.row.updateStatus == 1 ? 0 : 1;
-                                            column.row.updateStatus =
-                                                column.row.updateStatus == 1 ? 0 : 1;
-                                        }
+                            let value = column.row.updateStatus == 1;
+                            return row('Checkbox', {
+                                props: {
+                                    type: 'Checkbox',
+                                    size: 'small',
+                                    rowIndex: column.index,
+                                    disabled: column.row.allStatusDisableds,
+                                    value
+                                },
+                                on: {
+                                    'on-change': (event, data) => {
+                                        this.historyData[column.index].updateStatus =
+                                            column.row.updateStatus == 1 ? 0 : 1;
+                                        column.row.updateStatus =
+                                            column.row.updateStatus == 1 ? 0 : 1;
                                     }
-                                });
+                                }
+                            });
                             // }
                         }
                     },
@@ -179,24 +179,24 @@
                         key: 'deletetStatus',
                         render: (row, column, index) => {
                             // if(!historyData[0].tableName) {
-                                let value = column.row.deletetStatus == 1;
-                                return row('Checkbox', {
-                                    props: {
-                                        type: 'Checkbox',
-                                        size: 'small',
-                                        rowIndex: column.index,
-                                        disabled: column.row.allStatusDisableds,
-                                        value
-                                    },
-                                    on: {
-                                        'on-change': (event, data) => {
-                                            this.historyData[column.index].deletetStatus =
-                                                column.row.deletetStatus == 1 ? 0 : 1;
-                                            column.row.deletetStatus =
-                                                column.row.deletetStatus == 1 ? 0 : 1;
-                                        }
+                            let value = column.row.deletetStatus == 1;
+                            return row('Checkbox', {
+                                props: {
+                                    type: 'Checkbox',
+                                    size: 'small',
+                                    rowIndex: column.index,
+                                    disabled: column.row.allStatusDisableds,
+                                    value
+                                },
+                                on: {
+                                    'on-change': (event, data) => {
+                                        this.historyData[column.index].deletetStatus =
+                                            column.row.deletetStatus == 1 ? 0 : 1;
+                                        column.row.deletetStatus =
+                                            column.row.deletetStatus == 1 ? 0 : 1;
                                     }
-                                });
+                                }
+                            });
                             // }
                         }
                     }
@@ -259,6 +259,7 @@
                         res.data.data.forEach(function (e) {
                             users.push(e.email.split('@')[0]);
                         });
+
                         this.userList = users;
                         if (users.length > 0) {
                             this.formItem.userName = users[0];
@@ -468,7 +469,7 @@
                 }
 
             },
-         
+
             modelOk () {
                 this.resModal = false;
                 this.resModalList = [];
