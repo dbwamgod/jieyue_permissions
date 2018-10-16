@@ -30,8 +30,8 @@
         </Col>
     </Row>
     </Form>
-      <Table :columns="historyColumns" :data="historyData" ></Table>
-      <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-elevator class="paging" @on-change="changepage"></Page>
+      <Table :columns="historyColumns" :data="historyData" v-if='this.$store.state.app.homework.check_list'></Table>
+      <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-elevator class="paging" @on-change="changepage" v-if='this.$store.state.app.homework.check_list'></Page>
       <Modal
         v-model="resModal"
         title="返回结果"
@@ -132,7 +132,8 @@ export default {
               },
               style:{
                   cursor: 'pointer',
-                   color:'blue'
+                   color:'blue',
+
                 },
               on: {
                 "click": (event, data) => {
@@ -192,7 +193,7 @@ export default {
     };
   },
   created() {
-
+      this.$store.state.app.homework.log_info?this.historyColumns.splice(8,1):""
     this.init();
   },
   methods: {

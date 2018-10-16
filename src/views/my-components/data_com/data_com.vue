@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Table border :columns="columns7" :data="data6"></Table>
-        <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging" @on-change="changepage"></Page>
+        <Table border :columns="columns7" :data="data6"  v-if='this.$store.state.app.homework.mysql_list'></Table>
+        <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging" @on-change="changepage"  v-if='this.$store.state.app.homework.mysql_list'></Page>
 
     </div>
 </template>

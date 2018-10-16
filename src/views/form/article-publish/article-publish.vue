@@ -16,13 +16,13 @@
             <Row type="flex" justify="start" class="code-row-bg">
 
                 <Col span="5">
-                <Form-item label="用户名：">
+                <Form-item label="用户名：" v-if='this.$store.state.app.jur.user_list'>
                     <Select v-model="formItem.userName" placeholder="请选择" @on-change="dbNameSelectChange">
                         <Option v-for="item in userList" :value="item||''" :key="item">{{ item}}</Option>
                     </Select>
                 </Form-item>
                 </Col>
-                <Col span="5">
+                <Col span="5" v-if='this.$store.state.app.jur.all_data_library'>
                 <Form-item label="库名：">
                     <Select v-model="formItem.dbName" placeholder="请选择" @on-change='dbNameSelectChange'>
                         <Option v-for="item in cityList" :value="item.dbName||''" :key="item.dbName">{{ item.dbName}}
@@ -45,9 +45,11 @@
                 </Col>
             </Row>
         </Form>
-        <Table :columns="historyColumns" :data="historyData"></Table>
+        <Table :columns="historyColumns" :data="historyData" v-if="this.$store.state.app.jur.hive_data_surface"></Table>
+        <span>{{this.$store.state.app.jur.hive_data_surface?"":"暂无权限"}}</span>
+
         <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging"
-              @on-change="changepage"></Page>
+              @on-change="changepage" v-if="this.$store.state.app.jur.hive_data_surface"></Page>
         <Modal
                 v-model="resModal"
                 title="返回结果"
@@ -229,6 +231,7 @@
             };
         },
         created () {
+            this.$store.state.app.jur.edit_user? "":this.historyColumns.splice(2,4)
             this.init();
         },
         methods: {
@@ -459,8 +462,11 @@
                 });
             },
             dbNameSelectChange () {
-                this.formItem.tableName = '';
-                this.initList();
+                if( this.$store.state.app.jur.hive_data){
+                    this.formItem.tableName = '';
+                    this.initList();
+                }
+
             },
          
             modelOk () {

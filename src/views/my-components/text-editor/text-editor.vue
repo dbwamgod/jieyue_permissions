@@ -8,9 +8,8 @@
             <Button type="primary" @click="initList">刷新</Button>
             </Col>
         </Row>
-        <Table :columns="historyColumns" :data="historyData" :loading='SpinType'></Table>
-
-        <Row type="flex" justify="center" style="margin-top:30px;">
+        <Table :columns="historyColumns" :data="historyData" :loading='SpinType' v-if='this.$store.state.app.homework.now_status'></Table>
+        <Row type="flex" justify="center" style="margin-top:30px;" v-if='this.$store.state.app.homework.before_status'>
             <Col span="22" style="text-align:right;">
             <DatePicker type="datetime" placeholder="请选择日期时间" @on-change="onHandChange" @on-open-change='changepage'
                         :value="value1" format="yyyy-MM-dd HH:mm:ss"   @on-ok="handOk" style="width: 200px" ></DatePicker>

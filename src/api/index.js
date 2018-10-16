@@ -12,7 +12,14 @@ export default {
     // 	return _loginUrl +'/mc-auth/auth/login'
     // },
 
+    //获取userID
+    userId () {
+        return _baseT + '/platform-user-oauth2/user?' + 'access_token=' + Cookies.get('tokenY');
+    },
 
+    Resource_permissions () {
+        return  _baseT + '/platform-user-admin/resource/find/auth/'+ Cookies.get('party_userId') + '?' + 'access_token=' + Cookies.get('tokenY')
+    },
 
     login(){//登录
         // return _loginUrlT +'/user-auth/auth/login'

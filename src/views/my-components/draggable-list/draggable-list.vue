@@ -15,10 +15,9 @@
 
             </Row>
         </Form>
-        <Table :columns="historyColumns" :data="historyData"></Table>
+        <Table :columns="historyColumns" :data="historyData" v-if='this.$store.state.app.homework.operation_log_info' ></Table>
         <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging"
-              @on-change="changepage"></Page>
-
+              @on-change="changepage" v-if='this.$store.state.app.homework.operation_log_info'></Page>
     </div>
 </template>
 <style scoped>
