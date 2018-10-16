@@ -58,6 +58,13 @@
             };
         },
         methods: {
+            login_go (where = 'focus-large') {
+                Cookies.set('defaultHome', where);
+                this.$router.push({
+                    name: String(where)
+                });
+            },
+
             handleSubmit () {
                 let _self = this;
                 this.$refs.loginForm.validate(valid => {
@@ -69,11 +76,11 @@
                             fd.append('password', this.form.password);
                             fd.append('username', this.form.userName);
                             fd.append('client_id', 'browser');
-                            fd.append('client_secret','abc');
+                            fd.append('client_secret', 'abc');
                             fd.append('grant_type', 'password');
 
                             this.$axios({
-                                method: 'post', 
+                                method: 'post',
                                 url: api.login(),
                                 data: fd,
                                 headers: {
@@ -86,28 +93,140 @@
                                     Cookies.set('tokenY', res.data.access_token);
                                     this.$store.commit('addOpenSubmenu', '2-1');
                                     this.$store.commit('setAvator', require('@/images/u=3448484253,3685836170&fm=27&gp=0.jpg'));
-                                    this.$axios({//银河平台 if 页面
-                                        method: 'post',
-                                        url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
-                                        data: {
-                                            // userName: '1578326883@qq.com',
-                                            // pswd: '111111',
-                                            userName: this.form.userName,
-                                            pswd: this.form.password,
-                                        },
+
+                                    this.$axios({
+                                        method: 'get',
+                                        url: api.userId(),
                                         headers: {
-
-                                            'Content-Type': 'application/json;charset=UTF-8'
-                                        }
+                                            'content-Type': 'application/x-www-form-urlencoded',
+                                        },
                                     }).then(res => {
-                                        Cookies.set('azkaban', res.data.data.azkaban);
-                                        Cookies.set('hue', res.data.data.hue);
-                                        Cookies.set('spark.submit', res.data.data['spark.submit']);
-                                        this.$router.push({
-                                            name: 'focus-large'
-                                        });
-                                    });
+                                        Cookies.set('party_userId', res.data.principal.id);
+                                        this.$axios({
+                                            method: 'get',
+                                            url: api.Resource_permissions()
+                                        }).then((res) => {
+                                            if (res.data.code == 200) {
+                                                let max=[]
+                                                var dataLen = res.data.data;
+                                                for (var i = 0; i < res.data.data.length; i++) {
+                                                    for (var j = 0; j < dataLen.length - i - 1; j++) {
+                                                        if (dataLen[j].resourceCode > dataLen[j + 1].resourceCode) {
+                                                            var temp = dataLen[j];
+                                                            dataLen[j] = dataLen[j + 1];
+                                                            dataLen[j + 1] = temp;
+                                                        }
+                                                    }
+                                                    max.push(dataLen[i].resourceCode)
+                                                }
+                                                let b = Math.max(...max)
+                                                if(b<28){
+                                                    const title = '登录错误';
+                                                    Cookies.remove('userM');
+                                                    Cookies.remove('access');
+                                                    Cookies.remove('tokenY');
+                                                    Cookies.remove('party_userId');
+                                                    this.$Modal.error({
+                                                        title: title,
+                                                        content: "请不要跨平台登录",
+                                                    });
 
+                                                }else{
+
+                                                    localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
+                                                    let disNay = [];
+                                                    let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
+                                                    let resource = [...set];
+                                                    resource.forEach(r => {
+                                                        if (r.child) {
+                                                            r.child.forEach(r => {
+                                                                disNay.push(r);
+                                                            });
+                                                        }
+                                                    });
+                                                    for (let i = 0; i < resource.length; i++) {
+
+                                                        if (resource[i + 1]) {
+                                                            if (resource[i].resourceCode == '29' || resource[i + 1].resourceCode == '32') {
+                                                                this.login_go('focus-large');
+                                                                break;
+                                                            }
+                                                        }
+                                                        if (resource[i].resourceCode == '32') {
+                                                            this.login_go('task-warning');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '35') {
+                                                            this.login_go('task-inquire');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '38') {
+                                                            this.login_go('task-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '40') {
+                                                            this.login_go('spark-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '41') {
+                                                            this.login_go('HUE-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '42') {
+                                                            this.login_go('data_com');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '44') {
+                                                            this.login_go('task-dispatch');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == '45') {
+                                                            this.login_go('add-jurisdiction');
+                                                            break;
+                                                        }
+                                                    }
+                                                    localStorage.setItem('galaxy_child', JSON.stringify(disNay));
+
+                                                    this.$axios({//银河平台 if 页面
+                                                        method: 'post',
+                                                        url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
+                                                        data: {
+                                                            // userName: '1578326883@qq.com',
+                                                            // pswd: '111111',
+                                                            userName: this.form.userName,
+                                                            pswd: this.form.password,
+                                                        },
+                                                        headers: {
+
+                                                            'Content-Type': 'application/json;charset=UTF-8'
+                                                        }
+                                                    }).then(res => {
+                                                        Cookies.set('azkaban', res.data.data.azkaban);
+                                                        Cookies.set('hue', res.data.data.hue);
+                                                        Cookies.set('spark.submit', res.data.data['spark.submit']);
+                                                        /*this.$router.push({
+                                                            name: 'focus-large'
+                                                        });*/
+                                                    });
+
+                                                }
+
+
+                                            } else {
+                                                const title = '资源错误';
+                                                Cookies.remove('userM');
+                                                Cookies.remove('access');
+                                                Cookies.remove('tokenY');
+                                                Cookies.remove('party_userId');
+
+                                                this.$Modal.error({
+                                                    title: title,
+                                                    content: res.data.msg,
+                                                });
+                                            }
+                                        })
+
+                                    });
                                 }
                             }).catch(res => {
                                 this.$Message.info('密码和邮箱不匹配');
@@ -118,9 +237,7 @@
                         this.$Message.info('邮箱地址格式不对');
                     }
 
-            
                 });
-
 
             }
         }

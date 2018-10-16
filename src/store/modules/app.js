@@ -5,6 +5,25 @@ import Vue from 'vue';
 
 const app = {
     state: {
+        homework: {
+            now_status: false,
+            before_status: false,
+            early_warn_list: false,
+            kill_job_task: false,
+            check_list: false,
+            log_info: false,
+            operation_log_info: false,
+            mysql_list: false,
+        },
+        azkaban: {},
+        jur: {
+            all_data_library: false,
+            edit_user: false,
+            hive_data: false,
+            hive_data_surface: false,
+            user_list: false,
+        }
+        ,
         cachePage: [],
         lang: '',
         isFullScreen: false,
@@ -34,6 +53,51 @@ const app = {
         dontCache: ['text-editor', 'artical-publish'] // 在这里定义你不想要缓存的页面的name属性值(参见路由配置router.js)
     },
     mutations: {
+        judgeJurisdiction (state, code) {
+
+            switch (code) {
+                case "30":
+                    state.homework.now_status = true;
+                    break;
+                case "31":
+                    state.homework.before_status = true;
+                    break;
+                case "33":
+                    state.homework.early_warn_list = true;
+                    break;
+                case "34":
+                    state.homework.kill_job_task = true;
+                    break;
+                case "36":
+                    state.homework.check_list = true;
+                    break;
+                case "37":
+                    state.homework.log_info = true;
+                    break;
+                case "39":
+                    state.homework.operation_log_info = true;
+                    break;
+                case "43":
+                    state.homework.mysql_list = true;
+                    break;
+                case "46":
+                    state.jur.all_data_library = true;
+                    break;
+                case "47":
+                    state.jur.edit_user = true;
+                    break;
+                case "48":
+                    state.jur.hive_data = true;
+                    break;
+                case "49":
+                    state.jur.hive_data_surface = true;
+                    break;
+                case "50":
+                    state.jur.user_list = true;
+                    break;
+            }
+
+        },
         setTagsList (state, list) {
             state.tagsList.push(...list);
         },

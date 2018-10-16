@@ -14,7 +14,8 @@ const user = {
             Cookies.remove('hue');
             Cookies.remove('spark.submit');
             sessionStorage.removeItem(`pagesT`);
-
+            localStorage.removeItem("galaxy_Jurisdiction")
+            localStorage.removeItem("galaxy_child")
             // 恢复默认样式
             let themeLink = document.querySelector('link[name="theme"]');
             themeLink.setAttribute('href', '');

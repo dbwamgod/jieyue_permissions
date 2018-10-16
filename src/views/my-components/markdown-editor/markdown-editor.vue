@@ -30,7 +30,7 @@
         </Col> -->
     </Row>
     </Form>
-      <Table :columns="historyColumns" :data="newArr" ></Table>
+      <Table :columns="historyColumns" :data="newArr"  v-if='this.$store.state.app.homework.early_warn_list'></Table>
       <!-- <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging" @on-change="changepage"></Page> -->
       <Modal
         v-model="resModal"
@@ -141,7 +141,7 @@ export default {
             );
           }
         },
-        {
+          {
           title: "操作",
           key: "deletetStatus",
           minWidth:40,
@@ -239,7 +239,9 @@ export default {
     }
   },
   created() {
-    this.init();
+
+      this.$store.state.app.homework.kill_job_task?"":this.historyColumns.splice(8,1)
+          this.init();
   },
   methods: {
     init() {
