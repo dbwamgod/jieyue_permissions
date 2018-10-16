@@ -108,19 +108,18 @@
                                         }).then((res) => {
                                             if (res.data.code == 200) {
                                                 let max=[]
-                                                var dataLen = res.data.data;
-                                                for (var i = 0; i < res.data.data.length; i++) {
-                                                    for (var j = 0; j < dataLen.length - i - 1; j++) {
-                                                        if (dataLen[j].resourceCode > dataLen[j + 1].resourceCode) {
-                                                            var temp = dataLen[j];
-                                                            dataLen[j] = dataLen[j + 1];
-                                                            dataLen[j + 1] = temp;
-                                                        }
+
+                                                var dataLen = []
+                                                res.data.data.map((r,i)=>{
+                                                    if(r.resourceCode>28){
+                                                        dataLen.push(r)
                                                     }
+                                                })
+                                                for (var i = 0; i < dataLen.length; i++) {
                                                     max.push(dataLen[i].resourceCode)
                                                 }
-                                                let b = Math.max(...max)
-                                                if(b<28){
+
+                                                if(Math.max(...max)<28){
                                                     const title = '登录错误';
                                                     Cookies.remove('userM');
                                                     Cookies.remove('access');
@@ -132,7 +131,6 @@
                                                     });
 
                                                 }else{
-
                                                     localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
                                                     let disNay = [];
                                                     let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
@@ -145,7 +143,6 @@
                                                         }
                                                     });
                                                     for (let i = 0; i < resource.length; i++) {
-
                                                         if (resource[i + 1]) {
                                                             if (resource[i].resourceCode == '29' || resource[i + 1].resourceCode == '32') {
                                                                 this.login_go('focus-large');
@@ -191,8 +188,7 @@
                                                         method: 'post',
                                                         url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
                                                         data: {
-                                                            // userName: '1578326883@qq.com',
-                                                            // pswd: '111111',
+
                                                             userName: this.form.userName,
                                                             pswd: this.form.password,
                                                         },
