@@ -22,6 +22,7 @@ const app = {
             hive_data: false,
             hive_data_surface: false,
             user_list: false,
+            batch:false
         }
         ,
         cachePage: [],
@@ -56,44 +57,47 @@ const app = {
         judgeJurisdiction (state, code) {
 
             switch (code) {
-                case "30":
+                case '30':
                     state.homework.now_status = true;
                     break;
-                case "31":
+                case '31':
                     state.homework.before_status = true;
                     break;
-                case "33":
+                case '33':
                     state.homework.early_warn_list = true;
                     break;
-                case "34":
+                case '34':
                     state.homework.kill_job_task = true;
                     break;
-                case "36":
+                case '36':
                     state.homework.check_list = true;
                     break;
-                case "37":
+                case '37':
                     state.homework.log_info = true;
                     break;
-                case "39":
+                case '39':
                     state.homework.operation_log_info = true;
                     break;
-                case "43":
+                case '43':
                     state.homework.mysql_list = true;
                     break;
-                case "46":
+                case '46':
                     state.jur.all_data_library = true;
                     break;
-                case "47":
+                case '47':
                     state.jur.edit_user = true;
                     break;
-                case "48":
+                case '48':
                     state.jur.hive_data = true;
                     break;
-                case "49":
+                case '49':
                     state.jur.hive_data_surface = true;
                     break;
-                case "50":
+                case '50':
                     state.jur.user_list = true;
+                    break;
+                case '51':
+                    state.jur.batch = true;
                     break;
             }
 

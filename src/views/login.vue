@@ -183,31 +183,22 @@
                                                         }
                                                     }
                                                     localStorage.setItem('galaxy_child', JSON.stringify(disNay));
-
                                                     this.$axios({//银河平台 if 页面
                                                         method: 'post',
                                                         url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
                                                         data: {
-
                                                             userName: this.form.userName,
                                                             pswd: this.form.password,
                                                         },
                                                         headers: {
-
                                                             'Content-Type': 'application/json;charset=UTF-8'
                                                         }
                                                     }).then(res => {
                                                         Cookies.set('azkaban', res.data.data.azkaban);
                                                         Cookies.set('hue', res.data.data.hue);
                                                         Cookies.set('spark.submit', res.data.data['spark.submit']);
-                                                        /*this.$router.push({
-                                                            name: 'focus-large'
-                                                        });*/
                                                     });
-
                                                 }
-
-
                                             } else {
                                                 const title = '资源错误';
                                                 Cookies.remove('userM');

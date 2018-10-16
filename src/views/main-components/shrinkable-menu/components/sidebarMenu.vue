@@ -1,5 +1,5 @@
 <style lang="less">
-@import "../styles/menu.less";
+    @import "../styles/menu.less";
 </style>
 
 <template>
@@ -87,7 +87,7 @@
                     权限管理
                 </router-link>
             </MenuItem>
-            <MenuItem name="4-2" style="padding: 0;">
+            <MenuItem name="4-2" style="padding: 0;" v-if="menuDisplay.batch">
                 <router-link tag="li" to="/jurisdiction/del-jurisdiction" style="    width: 100%;
     height: 50px;
     text-align: center;
@@ -115,6 +115,7 @@
                     early_warn: false,
                     azkanban: false,
                     jurisdiction: false,
+                    batch: false
                 },
                 dropdown: {
                     homework: false,
@@ -192,9 +193,13 @@
                     }
                 }
                 let homeWork = 0;
+                let dropdowm = 0;
                 for (var variable of this.menuListDisplay) {
-                    if (variable == '权限管理') {
-                        this.dropdown.jurisdiction = true;
+                    if (variable == '批量管理') {
+                        dropdowm++;
+                        this.menuDisplay.batch = true;
+                    } else if (variable == '权限管理') {
+                        dropdowm++;
                         this.menuDisplay.jurisdiction = true;
                     } else if (variable == 'azkaban') {
                         this.dropdown.azkaban = true;
@@ -224,6 +229,9 @@
                 }
                 if (homeWork <= 7) {
                     this.dropdown.homework = true;
+                }
+                if (dropdowm <= 2) {
+                    this.dropdown.jurisdiction = true;
                 }
             }
 
@@ -278,8 +286,8 @@
 
 </script>
 <style>
-router-link {
-  color: white;
-}
+    router-link {
+        color: white;
+    }
 </style>
 
