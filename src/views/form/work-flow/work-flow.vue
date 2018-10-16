@@ -68,6 +68,7 @@
 <script>
 import api from "@/api";
 import Cookies from "js-cookie";
+import util from "@/libs/util";
 
 export default {
   data() {
@@ -156,7 +157,7 @@ export default {
       this.SpinType = true;
       let userName = this.formItem.userName;
       const params = [];
-      const tableNameList = this.formItem.input.replace(/\s+/g, "").split(",");
+      const tableNameList = util.uniq(this.formItem.input.replace(/\s+/g, "").split(","));
       this.formItem.checkbox.map((item, index) => {
         tableNameList.map(r => {
           params.push({
