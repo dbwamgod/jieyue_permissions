@@ -49,7 +49,9 @@
                         this.again_go('data_com');
                     } else if (Code == '44') {
                         this.again_go('task-dispatch');
-                    } else if (Code == '45') {
+                    } else if (Code == 'AUTH') {
+                        this.again_go('add-jurisdiction');
+                    } else if (Code == 'BATCH') {
                         this.again_go('add-jurisdiction');
                     }
                 }

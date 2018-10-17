@@ -187,8 +187,12 @@
                         this.activeName = '3-1';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '45') {
+                    else if (localQ[i].resourceCode == 'AUTH') {
                         this.activeName = '4-1';
+                        break;
+                    }
+                    else if (localQ[i].resourceCode == 'BATCH') {
+                        this.activeName = '4-2';
                         break;
                     }
                 }

@@ -106,99 +106,95 @@
                                             method: 'get',
                                             url: api.Resource_permissions()
                                         }).then((res) => {
+
                                             if (res.data.code == 200) {
-                                                let max=[]
+                                                res.data.data.map(r=> {
 
-                                                var dataLen = []
-                                                res.data.data.map((r,i)=>{
-                                                    if(r.resourceCode>28){
-                                                        dataLen.push(r)
-                                                    }
-                                                })
-                                                for (var i = 0; i < dataLen.length; i++) {
-                                                    max.push(dataLen[i].resourceCode)
-                                                }
+                                                    if (r.tenantCode == "GALAXY-PLATFORM") {
+                                                        let max = []
+                                                        var dataLen = []
+                                                        r.voList.map((res, i) => {
+                                                            dataLen.push(res)
+                                                        })
+                                                        // const title = '登录错误';
+                                                        // Cookies.remove('userM');
+                                                        // Cookies.remove('access');
+                                                        // Cookies.remove('tokenY');
+                                                        // Cookies.remove('party_userId');
+                                                        // this.$Modal.error({
+                                                        //     title: title,
+                                                        //     content: "请不要跨平台登录",
+                                                        // });
 
-                                                if(Math.max(...max)<28){
-                                                    const title = '登录错误';
-                                                    Cookies.remove('userM');
-                                                    Cookies.remove('access');
-                                                    Cookies.remove('tokenY');
-                                                    Cookies.remove('party_userId');
-                                                    this.$Modal.error({
-                                                        title: title,
-                                                        content: "请不要跨平台登录",
-                                                    });
-
-                                                }else{
-                                                    localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
-                                                    let disNay = [];
-                                                    let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
-                                                    let resource = [...set];
-                                                    resource.forEach(r => {
-                                                        if (r.child) {
-                                                            r.child.forEach(r => {
-                                                                disNay.push(r);
-                                                            });
-                                                        }
-                                                    });
-                                                    for (let i = 0; i < resource.length; i++) {
-                                                        if (resource[i + 1]) {
-                                                            if (resource[i].resourceCode == '29' || resource[i + 1].resourceCode == '32') {
-                                                                this.login_go('focus-large');
+                                                        localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
+                                                        let disNay = [];
+                                                        let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
+                                                        let resource = [...set];
+                                                        resource.forEach(r => {
+                                                            if (r.child) {
+                                                                r.child.forEach(r => {
+                                                                    disNay.push(r);
+                                                                });
+                                                            }
+                                                        });
+                                                        for (let i = 0; i < resource.length; i++) {
+                                                            if (resource[i + 1]) {
+                                                                if (resource[i].resourceCode == '29' || resource[i + 1].resourceCode == '32') {
+                                                                    this.login_go('focus-large');
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if (resource[i].resourceCode == '32') {
+                                                                this.login_go('task-warning');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '35') {
+                                                                this.login_go('task-inquire');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '38') {
+                                                                this.login_go('task-table');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '40') {
+                                                                this.login_go('spark-table');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '41') {
+                                                                this.login_go('HUE-table');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '42') {
+                                                                this.login_go('data_com');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '44') {
+                                                                this.login_go('task-dispatch');
+                                                                break;
+                                                            }
+                                                            if (resource[i].resourceCode == '45') {
+                                                                this.login_go('add-jurisdiction');
                                                                 break;
                                                             }
                                                         }
-                                                        if (resource[i].resourceCode == '32') {
-                                                            this.login_go('task-warning');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '35') {
-                                                            this.login_go('task-inquire');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '38') {
-                                                            this.login_go('task-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '40') {
-                                                            this.login_go('spark-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '41') {
-                                                            this.login_go('HUE-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '42') {
-                                                            this.login_go('data_com');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '44') {
-                                                            this.login_go('task-dispatch');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == '45') {
-                                                            this.login_go('add-jurisdiction');
-                                                            break;
-                                                        }
+                                                        localStorage.setItem('galaxy_child', JSON.stringify(disNay));
+                                                        this.$axios({//银河平台 if 页面
+                                                            method: 'post',
+                                                            url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
+                                                            data: {
+                                                                userName: this.form.userName,
+                                                                pswd: this.form.password,
+                                                            },
+                                                            headers: {
+                                                                'Content-Type': 'application/json;charset=UTF-8'
+                                                            }
+                                                        }).then(res => {
+                                                            Cookies.set('azkaban', res.data.data.azkaban);
+                                                            Cookies.set('hue', res.data.data.hue);
+                                                            Cookies.set('spark.submit', res.data.data['spark.submit']);
+                                                        });
                                                     }
-                                                    localStorage.setItem('galaxy_child', JSON.stringify(disNay));
-                                                    this.$axios({//银河平台 if 页面
-                                                        method: 'post',
-                                                        url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
-                                                        data: {
-                                                            userName: this.form.userName,
-                                                            pswd: this.form.password,
-                                                        },
-                                                        headers: {
-                                                            'Content-Type': 'application/json;charset=UTF-8'
-                                                        }
-                                                    }).then(res => {
-                                                        Cookies.set('azkaban', res.data.data.azkaban);
-                                                        Cookies.set('hue', res.data.data.hue);
-                                                        Cookies.set('spark.submit', res.data.data['spark.submit']);
-                                                    });
-                                                }
+                                                })
                                             } else {
                                                 const title = '资源错误';
                                                 Cookies.remove('userM');

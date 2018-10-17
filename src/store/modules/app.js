@@ -17,11 +17,7 @@ const app = {
         },
         azkaban: {},
         jur: {
-            all_data_library: false,
-            edit_user: false,
-            hive_data: false,
-            hive_data_surface: false,
-            user_list: false,
+            jurisdiction: false,
             batch:false
         }
         ,
@@ -81,26 +77,13 @@ const app = {
                 case '43':
                     state.homework.mysql_list = true;
                     break;
-                case '46':
-                    state.jur.all_data_library = true;
+                case "AUTH-USER_AUTH":
+                    state.jur.jurisdiction = true;
                     break;
-                case '47':
-                    state.jur.edit_user = true;
-                    break;
-                case '48':
-                    state.jur.hive_data = true;
-                    break;
-                case '49':
-                    state.jur.hive_data_surface = true;
-                    break;
-                case '50':
-                    state.jur.user_list = true;
-                    break;
-                case '51':
+                case 'BATCH-USER_AUTH':
                     state.jur.batch = true;
                     break;
             }
-
         },
         setTagsList (state, list) {
             state.tagsList.push(...list);
