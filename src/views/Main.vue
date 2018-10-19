@@ -126,6 +126,12 @@
             },
         },
         methods: {
+            again_go (where = 'focus-large') {
+                Cookies.set('defaultHome', where);
+                this.$router.push({
+                    name: String(where)
+                });
+            },
             init () {
                 let pathArr = util.setCurrentPath(this, this.$route.name);
                 this.$store.commit('updateMenulist');
@@ -137,6 +143,7 @@
                 this.messageCount = messageCount.toString();
                 this.checkTag(this.$route.name);
                 this.$store.commit('setMessageCount', 3);
+
             },
             loginOut(){
 
@@ -227,12 +234,59 @@
             }
         },
         mounted () {
+                if (localStorage.getItem('galaxy_child')) {
+                    JSON.parse(localStorage.getItem('galaxy_child')).map(r => {
+                        this.$store.commit("judgeJurisdiction",r.resourceCode)
+                    });
+                }
+
+
             this.init();
             window.addEventListener('resize', this.scrollBarResize);
         },
         created () {
             // 显示打开的页面的列表
             this.$store.commit('setOpenedList');
+            //本地权限校验没有存储后 会自动跳到登录页
+            if (!JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))) {
+                this.$store.commit('logout', this);
+                this.$store.commit('clearOpenedSubmenu');
+                this.$router.push({
+                    name: 'login'
+                });
+            }
+            //判断已登录后重新加载页面而导致的权限bug
+            if (!sessionStorage.getItem('pagesT')) {
+                if (localStorage.getItem('galaxy_Jurisdiction')) {
+                    let Code = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[0].resourceCode;
+                    let CodeOrg = 0;
+                    if (JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[1]) {
+                        CodeOrg = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[1].resourceCode;
+                    }
+
+                    if (Code == 'CLUSTER_GRAIL' ) {
+                        this.again_go('focus-large');
+                    } else if ( CodeOrg == 'TASK_WARN') {
+                        this.again_go('task-warning');
+                    } else if (Code == 'TASK_FIND') {
+                        this.again_go('task-inquire');
+                    } else if (Code == 'TASK_RECORD') {
+                        this.again_go('task-table');
+                    } else if (Code == 'SPARK_WORKBENCH') {
+                        this.again_go('spark-table');
+                    } else if (Code == 'HUE_WORKBENCH') {
+                        this.again_go('HUE-table');
+                    } else if (Code == 'METADATA_COMPARE') {
+                        this.again_go('data_com');
+                    } else if (Code == 'AZKABAN') {
+                        this.again_go('task-dispatch');
+                    } else if (Code == 'AUTH') {
+                        this.again_go('add-jurisdiction');
+                    } else if (Code == 'BATCH') {
+                        this.again_go('workflow');
+                    }
+                }
+            }
         },
         dispatch () {
             window.removeEventListener('resize', this.scrollBarResize);

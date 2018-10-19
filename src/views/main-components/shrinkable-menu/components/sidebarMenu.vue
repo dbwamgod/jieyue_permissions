@@ -1,5 +1,5 @@
 <style lang="less">
-@import "../styles/menu.less";
+    @import "../styles/menu.less";
 </style>
 
 <template>
@@ -87,7 +87,7 @@
                     权限管理
                 </router-link>
             </MenuItem>
-            <MenuItem name="4-2" style="padding: 0;">
+            <MenuItem name="4-2" style="padding: 0;" v-if="menuDisplay.batch">
                 <router-link tag="li" to="/jurisdiction/del-jurisdiction" style="    width: 100%;
     height: 50px;
     text-align: center;
@@ -115,6 +115,7 @@
                     early_warn: false,
                     azkanban: false,
                     jurisdiction: false,
+                    batch: false
                 },
                 dropdown: {
                     homework: false,
@@ -153,48 +154,56 @@
 
                 for (let i = 0; i < localQ.length; i++) {
                     if (localQ[i + 1]) {
-                        if (localQ[i].resourceCode == '29' || localQ[i + 1].resourceCode == '29') {
+                        if (localQ[i].resourceCode == 'CLUSTER_GRAIL' || localQ[i + 1].resourceCode == 'CLUSTER_GRAIL') {
                             this.activeName = '2-1';
                             break;
                         }
                     }
-                    if (localQ[i].resourceCode == '32') {
+                    if (localQ[i].resourceCode == 'TASK_WARN') {
                         this.activeName = '2-2';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '35') {
+                    else if (localQ[i].resourceCode == 'TASK_FIND') {
                         this.activeName = '2-3';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '38') {
+                    else if (localQ[i].resourceCode == 'TASK_RECORD') {
                         this.activeName = '2-4';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '40') {
+                    else if (localQ[i].resourceCode == 'SPARK_WORKBENCH') {
                         this.activeName = '2-5';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '41') {
+                    else if (localQ[i].resourceCode == 'HUE_WORKBENCH') {
                         this.activeName = '2-6';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '42') {
+                    else if (localQ[i].resourceCode == 'METADATA_COMPARE') {
                         this.activeName = '2-7';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '44') {
+                    else if (localQ[i].resourceCode == 'AZKABAN') {
                         this.activeName = '3-1';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '45') {
+                    else if (localQ[i].resourceCode == 'AUTH') {
                         this.activeName = '4-1';
+                        break;
+                    }
+                    else if (localQ[i].resourceCode == 'BATCH') {
+                        this.activeName = '4-2';
                         break;
                     }
                 }
                 let homeWork = 0;
+                let dropdowm = 0;
                 for (var variable of this.menuListDisplay) {
-                    if (variable == '权限管理') {
-                        this.dropdown.jurisdiction = true;
+                    if (variable == '批量管理') {
+                        dropdowm++;
+                        this.menuDisplay.batch = true;
+                    } else if (variable == '权限管理') {
+                        dropdowm++;
                         this.menuDisplay.jurisdiction = true;
                     } else if (variable == 'azkaban') {
                         this.dropdown.azkaban = true;
@@ -225,6 +234,9 @@
                 if (homeWork <= 7) {
                     this.dropdown.homework = true;
                 }
+                if (dropdowm <= 2) {
+                    this.dropdown.jurisdiction = true;
+                }
             }
 
             this.act_name = sessionStorage.getItem(`pagesT`) ? sessionStorage.getItem(`pagesT`) : '2-1';
@@ -235,35 +247,12 @@
         },
         methods: {
 
-            // changeMenu (active) {
-            //     this.$emit('on-change', active);
-            //      console.log('=1=1=1=1=1=11==1=11==',active)
-            //     // if(this.openNames.indexOf(data)>-1){
-            //     //     this.openNames.remove(data)
-            //     // }else{
-            //     //     this.openNames.push(data)
-            //     // }
-            //     console.log(this.openNames)
-            // },
-            // itemTitle (item) {
-            //     if (typeof item.title === 'object') {
-            //         return this.$t(item.title.i18n);
-            //     } else {
-            //         return item.title;
-            //     }
-            // }
+
             menuSelect (name) {
 
                 sessionStorage.setItem(`pagesT`, `${name}`);
                 this.$store.commit('addOpenSubmenu', name);
-                //  console.log('side', this.openNames, this.$route.name);
-                // console.log('=1=1=1=1=1=11==1=11==',data,row,index)
-                // if(this.openNames.indexOf(data)>-1){
-                //     this.openNames.remove(data)
-                // }else{
-                //     this.openNames.push(data)
-                // }
-                // console.log(this.openNames)
+
             }
         },
         updated () {
@@ -278,8 +267,8 @@
 
 </script>
 <style>
-router-link {
-  color: white;
-}
+    router-link {
+        color: white;
+    }
 </style>
 

@@ -17,11 +17,8 @@ const app = {
         },
         azkaban: {},
         jur: {
-            all_data_library: false,
-            edit_user: false,
-            hive_data: false,
-            hive_data_surface: false,
-            user_list: false,
+            jurisdiction: false,
+            batch:false
         }
         ,
         cachePage: [],
@@ -56,47 +53,37 @@ const app = {
         judgeJurisdiction (state, code) {
 
             switch (code) {
-                case "30":
+                case 'CLUSTER_GRAIL-CURR_STATUS':
                     state.homework.now_status = true;
                     break;
-                case "31":
+                case 'CLUSTER_GRAIL-HISTORY_DATA':
                     state.homework.before_status = true;
                     break;
-                case "33":
+                case 'TASK_WARN-LIST':
                     state.homework.early_warn_list = true;
                     break;
-                case "34":
+                case "TASK_WARN-KILL":
                     state.homework.kill_job_task = true;
                     break;
-                case "36":
+                case 'TASK_FIND-LIST':
                     state.homework.check_list = true;
                     break;
-                case "37":
+                case 'TASK_FIND-LOG':
                     state.homework.log_info = true;
                     break;
-                case "39":
+                case 'TASK_RECOR-LOG':
                     state.homework.operation_log_info = true;
                     break;
-                case "43":
+                case 'METADATA_COMPARE-MYSQL_LIST':
                     state.homework.mysql_list = true;
                     break;
-                case "46":
-                    state.jur.all_data_library = true;
+                case "AUTH-USER_AUTH":
+                    state.jur.jurisdiction = true;
                     break;
-                case "47":
-                    state.jur.edit_user = true;
-                    break;
-                case "48":
-                    state.jur.hive_data = true;
-                    break;
-                case "49":
-                    state.jur.hive_data_surface = true;
-                    break;
-                case "50":
-                    state.jur.user_list = true;
+                case 'BATCH-USER_AUTH':
+                    state.jur.batch = true;
                     break;
             }
-
         },
         setTagsList (state, list) {
             state.tagsList.push(...list);

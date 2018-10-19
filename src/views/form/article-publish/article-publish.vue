@@ -16,13 +16,13 @@
             <Row type="flex" justify="start" class="code-row-bg">
 
                 <Col span="5">
-                <Form-item label="用户名：" v-if='this.$store.state.app.jur.user_list'>
+                <Form-item label="用户名：" >
                     <Select v-model="formItem.userName" placeholder="请选择" @on-change="dbNameSelectChange">
                         <Option v-for="item in userList" :value="item||''" :key="item">{{ item}}</Option>
                     </Select>
                 </Form-item>
                 </Col>
-                <Col span="5" v-if='this.$store.state.app.jur.all_data_library'>
+                <Col span="5">
                 <Form-item label="库名：">
                     <Select v-model="formItem.dbName" placeholder="请选择" @on-change='dbNameSelectChange'>
                         <Option v-for="item in cityList" :value="item.dbName||''" :key="item.dbName">{{ item.dbName}}
@@ -45,11 +45,11 @@
                 </Col>
             </Row>
         </Form>
-        <Table :columns="historyColumns" :data="historyData" v-if="this.$store.state.app.jur.hive_data_surface"></Table>
-        <span>{{this.$store.state.app.jur.hive_data_surface?"":"暂无权限"}}</span>
+        <Table :columns="historyColumns" :data="historyData"></Table>
+
 
         <Page :total="dataCount" :page-size="page.pageSize" :current="page.pageIndex" show-total class="paging"
-              @on-change="changepage" v-if="this.$store.state.app.jur.hive_data_surface"></Page>
+              @on-change="changepage"></Page>
         <Modal
                 v-model="resModal"
                 title="返回结果"
@@ -231,11 +231,11 @@
             };
         },
         created () {
-            this.$store.state.app.jur.edit_user? "":this.historyColumns.splice(2,4)
             this.init();
         },
         methods: {
             init () {
+
                 this.$axios({
                     method: 'post',
                     url: api.queryAllUsers(),
@@ -266,6 +266,7 @@
                         }
                     }
                 });
+
                 this.$axios({
                     //库名
                     method: 'get',
@@ -276,6 +277,7 @@
                     }
                 }).then(res => {
                     if (res.data.code == 200) {
+
                         this.cityList = res.data.data;
                         this.formItem.dbName = res.data.data[0].dbName;
                         this.initList(); //要传入tableName
@@ -463,11 +465,8 @@
                 });
             },
             dbNameSelectChange () {
-                if( this.$store.state.app.jur.hive_data){
                     this.formItem.tableName = '';
                     this.initList();
-                }
-
             },
 
             modelOk () {
