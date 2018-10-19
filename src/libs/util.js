@@ -283,7 +283,7 @@ util.uniq = function (array) {
     var temp = [];
     var index = [];
     var l = array.length;
-        for (var i = 0; i < l; i++) {
+    for (var i = 0; i < l; i++) {
         for (var j = i + 1; j < l; j++) {
             if (array[i] === array[j]) {
                 i++;
@@ -296,4 +296,14 @@ util.uniq = function (array) {
 
     return temp;
 };
+
+util.Reduce = function (arr) {
+    var obj = {};
+    arr = arr.reduce(function (item, next) {
+        obj[next.operate] ? '' : obj[next.operate] = true && item.push(next);
+        return item;
+
+    }, []);
+    return arr;
+}
 export default util;
