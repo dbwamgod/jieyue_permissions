@@ -154,36 +154,36 @@
 
                 for (let i = 0; i < localQ.length; i++) {
                     if (localQ[i + 1]) {
-                        if (localQ[i].resourceCode == '29' || localQ[i + 1].resourceCode == '29') {
+                        if (localQ[i].resourceCode == 'CLUSTER_GRAIL' || localQ[i + 1].resourceCode == 'CLUSTER_GRAIL') {
                             this.activeName = '2-1';
                             break;
                         }
                     }
-                    if (localQ[i].resourceCode == '32') {
+                    if (localQ[i].resourceCode == 'TASK_WARN') {
                         this.activeName = '2-2';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '35') {
+                    else if (localQ[i].resourceCode == 'TASK_FIND') {
                         this.activeName = '2-3';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '38') {
+                    else if (localQ[i].resourceCode == 'TASK_RECORD') {
                         this.activeName = '2-4';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '40') {
+                    else if (localQ[i].resourceCode == 'SPARK_WORKBENCH') {
                         this.activeName = '2-5';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '41') {
+                    else if (localQ[i].resourceCode == 'HUE_WORKBENCH') {
                         this.activeName = '2-6';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '42') {
+                    else if (localQ[i].resourceCode == 'METADATA_COMPARE') {
                         this.activeName = '2-7';
                         break;
                     }
-                    else if (localQ[i].resourceCode == '44') {
+                    else if (localQ[i].resourceCode == 'AZKABAN') {
                         this.activeName = '3-1';
                         break;
                     }
@@ -247,35 +247,12 @@
         },
         methods: {
 
-            // changeMenu (active) {
-            //     this.$emit('on-change', active);
-            //      console.log('=1=1=1=1=1=11==1=11==',active)
-            //     // if(this.openNames.indexOf(data)>-1){
-            //     //     this.openNames.remove(data)
-            //     // }else{
-            //     //     this.openNames.push(data)
-            //     // }
-            //     console.log(this.openNames)
-            // },
-            // itemTitle (item) {
-            //     if (typeof item.title === 'object') {
-            //         return this.$t(item.title.i18n);
-            //     } else {
-            //         return item.title;
-            //     }
-            // }
+
             menuSelect (name) {
 
                 sessionStorage.setItem(`pagesT`, `${name}`);
                 this.$store.commit('addOpenSubmenu', name);
-                //  console.log('side', this.openNames, this.$route.name);
-                // console.log('=1=1=1=1=1=11==1=11==',data,row,index)
-                // if(this.openNames.indexOf(data)>-1){
-                //     this.openNames.remove(data)
-                // }else{
-                //     this.openNames.push(data)
-                // }
-                // console.log(this.openNames)
+
             }
         },
         updated () {

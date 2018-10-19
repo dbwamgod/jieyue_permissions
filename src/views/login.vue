@@ -108,23 +108,16 @@
                                         }).then((res) => {
 
                                             if (res.data.code == 200) {
-                                                res.data.data.map(r=> {
+                                                let flag=true
+                                                res.data.data.map(r => {
 
-                                                    if (r.tenantCode == "GALAXY-PLATFORM") {
-                                                        let max = []
-                                                        var dataLen = []
+                                                    if (r.tenantCode == 'GALAXY_PLATFORM') {
+                                                        flag=false
+                                                        let max = [];
+                                                        var dataLen = [];
                                                         r.voList.map((res, i) => {
-                                                            dataLen.push(res)
-                                                        })
-                                                        // const title = '登录错误';
-                                                        // Cookies.remove('userM');
-                                                        // Cookies.remove('access');
-                                                        // Cookies.remove('tokenY');
-                                                        // Cookies.remove('party_userId');
-                                                        // this.$Modal.error({
-                                                        //     title: title,
-                                                        //     content: "请不要跨平台登录",
-                                                        // });
+                                                            dataLen.push(res);
+                                                        });
 
                                                         localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
                                                         let disNay = [];
@@ -138,45 +131,50 @@
                                                             }
                                                         });
                                                         for (let i = 0; i < resource.length; i++) {
-                                                            if (resource[i + 1]) {
-                                                                if (resource[i].resourceCode == '29' || resource[i + 1].resourceCode == '32') {
-                                                                    this.login_go('focus-large');
-                                                                    break;
-                                                                }
+
+                                                            if (resource[i].resourceCode == 'CLUSTER_GRAIL') {
+                                                                this.login_go('focus-large');
+                                                                break;
                                                             }
-                                                            if (resource[i].resourceCode == '32') {
+
+                                                            if (resource[i].resourceCode == 'TASK_WARN') {
                                                                 this.login_go('task-warning');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '35') {
+                                                            if (resource[i].resourceCode == 'TASK_FIND') {
                                                                 this.login_go('task-inquire');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '38') {
+                                                            if (resource[i].resourceCode == 'TASK_RECORD') {
                                                                 this.login_go('task-table');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '40') {
+                                                            if (resource[i].resourceCode == 'SPARK_WORKBENCH') {
                                                                 this.login_go('spark-table');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '41') {
+                                                            if (resource[i].resourceCode == 'HUE_WORKBENCH') {
                                                                 this.login_go('HUE-table');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '42') {
+                                                            if (resource[i].resourceCode == 'METADATA_COMPARE') {
                                                                 this.login_go('data_com');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '44') {
+                                                            if (resource[i].resourceCode == 'AZKABAN') {
                                                                 this.login_go('task-dispatch');
                                                                 break;
                                                             }
-                                                            if (resource[i].resourceCode == '45') {
+                                                            if (resource[i].resourceCode == 'AUTH') {
                                                                 this.login_go('add-jurisdiction');
                                                                 break;
                                                             }
+                                                            if (resource[i].resourceCode == 'BATCH') {
+                                                                this.login_go('workflow');
+                                                                break;
+                                                            }
                                                         }
+
                                                         localStorage.setItem('galaxy_child', JSON.stringify(disNay));
                                                         this.$axios({//银河平台 if 页面
                                                             method: 'post',
@@ -189,12 +187,25 @@
                                                                 'Content-Type': 'application/json;charset=UTF-8'
                                                             }
                                                         }).then(res => {
+
                                                             Cookies.set('azkaban', res.data.data.azkaban);
                                                             Cookies.set('hue', res.data.data.hue);
                                                             Cookies.set('spark.submit', res.data.data['spark.submit']);
                                                         });
+                                                    } else if(r.tenantCode != 'GALAXY_PLATFORM'&& flag){
+
+                                                        const title = '登录错误';
+                                                        Cookies.remove('userM');
+                                                        Cookies.remove('access');
+                                                        Cookies.remove('tokenY');
+                                                        Cookies.remove('party_userId');
+                                                        this.$Modal.error({
+                                                            title: title,
+                                                            content: '您未开通系统权限, 请联系管理员',
+                                                        });
                                                     }
-                                                })
+
+                                                });
                                             } else {
                                                 const title = '资源错误';
                                                 Cookies.remove('userM');
@@ -207,7 +218,7 @@
                                                     content: res.data.msg,
                                                 });
                                             }
-                                        })
+                                        });
 
                                     });
                                 }

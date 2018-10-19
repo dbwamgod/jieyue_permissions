@@ -53,28 +53,28 @@ const app = {
         judgeJurisdiction (state, code) {
 
             switch (code) {
-                case '30':
+                case 'CLUSTER_GRAIL-CURR_STATUS':
                     state.homework.now_status = true;
                     break;
-                case '31':
+                case 'CLUSTER_GRAIL-HISTORY_DATA':
                     state.homework.before_status = true;
                     break;
-                case '33':
+                case 'TASK_WARN-LIST':
                     state.homework.early_warn_list = true;
                     break;
-                case '34':
+                case "TASK_WARN-KILL":
                     state.homework.kill_job_task = true;
                     break;
-                case '36':
+                case 'TASK_FIND-LIST':
                     state.homework.check_list = true;
                     break;
-                case '37':
+                case 'TASK_FIND-LOG':
                     state.homework.log_info = true;
                     break;
-                case '39':
+                case 'TASK_RECOR-LOG':
                     state.homework.operation_log_info = true;
                     break;
-                case '43':
+                case 'METADATA_COMPARE-MYSQL_LIST':
                     state.homework.mysql_list = true;
                     break;
                 case "AUTH-USER_AUTH":
