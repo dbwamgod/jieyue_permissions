@@ -3,41 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="484d7776-59f4-48d1-8897-fb62eeeb9ea4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/platform_party/0.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/1.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/10.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/11.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/12.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/13.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/14.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/15.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/16.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/17.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/18.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/19.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/2.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/20.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/21.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/22.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/23.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/24.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/3.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/4.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/5.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/6.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/7.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/8.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/9.9c0e8e22e20b9e982dbc.chunk.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/index.html" afterPath="$PROJECT_DIR$/platform_party/index.html" />
-      <change beforePath="$PROJECT_DIR$/platform_party/main.9c0e8e22e20b9e982dbc.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/main.9c0e8e22e20b9e982dbc.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/vender-base.9c0e8e22e20b9e982dbc.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/platform_party/vender-exten.9c0e8e22e20b9e982dbc.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/app.vue" afterPath="$PROJECT_DIR$/src/app.vue" />
-      <change beforePath="$PROJECT_DIR$/src/store/modules/app.js" afterPath="$PROJECT_DIR$/src/store/modules/app.js" />
-      <change beforePath="$PROJECT_DIR$/src/views/Main.vue" afterPath="$PROJECT_DIR$/src/views/Main.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/login.vue" afterPath="$PROJECT_DIR$/src/views/login.vue" />
-      <change beforePath="$PROJECT_DIR$/src/views/main-components/shrinkable-menu/components/sidebarMenu.vue" afterPath="$PROJECT_DIR$/src/views/main-components/shrinkable-menu/components/sidebarMenu.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -129,7 +94,7 @@
       <file leaf-file-name="login.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
+            <state relative-caret-position="-850">
               <caret line="70" column="49" lean-forward="false" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
               <folding>
                 <element signature="e#4893#11232#0" expanded="false" />
@@ -545,12 +510,12 @@
       <workItem from="1539828126560" duration="2223000" />
       <workItem from="1539857985037" duration="126000" />
       <workItem from="1539911738803" duration="3090000" />
-      <workItem from="1539927763549" duration="7308000" />
+      <workItem from="1539927763549" duration="9276000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285339000" />
+    <option name="totallyTimeSpent" value="287307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -979,7 +944,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/login.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="-850">
           <caret line="70" column="49" lean-forward="false" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
           <folding>
             <element signature="e#4893#11232#0" expanded="false" />
