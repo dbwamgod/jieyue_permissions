@@ -54,6 +54,18 @@
                         {required: true, message: '账号不能为空', trigger: 'blur'}
                     ],
                     password: [{required: true, message: '密码不能为空', trigger: 'blur'}]
+                },
+                code_party:{
+                    CLUSTER_GRAIL:"focus-large",
+                    TASK_WARN:"task-warning",
+                    TASK_FIND:"task-inquire",
+                    TASK_RECORD:"task-table",
+                    SPARK_WORKBENCH:"spark-table",
+                    HUE_WORKBENCH:"HUE-table",
+                    METADATA_COMPARE:"data_com",
+                    AZKABAN:"task-dispatch",
+                    AUTH:"add-jurisdiction",
+                    BATCH:"workflow",
                 }
             };
         },
@@ -127,48 +139,9 @@
                                                             });
                                                         }
                                                     });
-                                                    for (let i = 0; i < resource.length; i++) {
-
-                                                        if (resource[i].resourceCode == 'CLUSTER_GRAIL') {
-                                                            this.login_go('focus-large');
-                                                            break;
-                                                        }
-
-                                                        if (resource[i].resourceCode == 'TASK_WARN') {
-                                                            this.login_go('task-warning');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'TASK_FIND') {
-                                                            this.login_go('task-inquire');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'TASK_RECORD') {
-                                                            this.login_go('task-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'SPARK_WORKBENCH') {
-                                                            this.login_go('spark-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'HUE_WORKBENCH') {
-                                                            this.login_go('HUE-table');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'METADATA_COMPARE') {
-                                                            this.login_go('data_com');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'AZKABAN') {
-                                                            this.login_go('task-dispatch');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'AUTH') {
-                                                            this.login_go('add-jurisdiction');
-                                                            break;
-                                                        }
-                                                        if (resource[i].resourceCode == 'BATCH') {
-                                                            this.login_go('workflow');
-                                                            break;
+                                                    for (var code in this.code_party) {
+                                                        if(code==resource[0].resourceCode){
+                                                            this.login_go(this.code_party.code)
                                                         }
                                                     }
                                                     localStorage.setItem('galaxy_child', JSON.stringify(disNay));

@@ -296,7 +296,6 @@ util.uniq = function (array) {
 
     return temp;
 };
-
 util.Reduce = function (arr) {
     var obj = {};
     arr = arr.reduce(function (item, next) {
@@ -305,5 +304,58 @@ util.Reduce = function (arr) {
 
     }, []);
     return arr;
-}
+};
+
+
+/*
+* 权限校验
+* 参数:a,b,c,d,e;为权限名字
+* vm:this
+* */
+util.jurisdiction = function (vm, a, b, c, d, e = '无') {
+    if (JSON.parse(localStorage.getItem('Jurisdiction'))) {
+        JSON.parse(localStorage.getItem('Jurisdiction')).forEach(r => {
+            r.child && r.child.forEach(r => {
+                if (r.resourceName == a) {
+                    vm.searchShow = true;
+                } else if (r.resourceName == b) {
+                    vm.adds = true;
+                } else if (r.resourceName == c) {
+                    vm.operation.edit = true;
+                    vm.flag = 1;
+                } else if (r.resourceName == d) {
+                    if (vm.flag === 1) {
+                        vm.operation.edit_del = true;
+                        vm.flag = 2;
+                    } else {
+                        vm.del = true;
+                        vm.flag = 3;
+                    }
+                } else if (r.resourceName == e) {
+                    if (vm.flag === 2) {
+                        vm.operation.edit_del_binding = true;
+                    } else if (vm.flag === 0) {
+                        vm.operation.binding = true;
+                    } else if (vm.flag === 3) {
+                        vm.operation.del_binding = true;
+                    } else if (vm.flag === 1) {
+                        vm.operation.edit_binding = true;
+                    }
+                }
+            });
+        });
+    } else {
+        if (Cookies.get('user_access')) {
+            vm.$Message.error('无法检测到你的权限');
+            vm.$store.commit('logout', vm);
+            vm.$store.commit('clearOpenedSubmenu');
+            vm.$router.push({
+                name: 'login'
+            });
+        }
+
+    }
+};
+
+
 export default util;

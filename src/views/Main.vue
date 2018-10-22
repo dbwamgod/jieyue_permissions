@@ -5,13 +5,13 @@
     <div class="main" :class="{'main-hide-text': shrink}">
         <div class="sidebar-menu-con" :style="{width: shrink?'60px':'200px', overflow: shrink ? 'visible' : 'auto'}">
             <scroll-bar ref="scrollBar">
-                <shrinkable-menu 
-                    :shrink="shrink"
-                    @on-change="handleSubmenuChange"
-                    :theme="menuTheme" 
-                    :before-push="beforePush"
-                    :open-names="openedSubmenuArr"
-                    :menu-list="menuList">
+                <shrinkable-menu
+                        :shrink="shrink"
+                        @on-change="handleSubmenuChange"
+                        :theme="menuTheme"
+                        :before-push="beforePush"
+                        :open-names="openedSubmenuArr"
+                        :menu-list="menuList">
                     <div slot="top" class="logo-con">
                         <!--<img v-show="!shrink"  src="../images/logo.jpg" key="max-logo" />
                         <img v-show="shrink" src="../images/logo-min.jpg" key="min-logo" />-->
@@ -24,7 +24,8 @@
         <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
             <div class="main-header">
                 <div class="navicon-con">
-                    <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)', boxShadow:'none'}" type="text" @click="toggleClick">
+                    <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)', boxShadow:'none'}"
+                            type="text" @click="toggleClick">
                         <Icon type="navicon" size="32"></Icon>
                     </Button>
                 </div>
@@ -79,7 +80,7 @@
     import Cookies from 'js-cookie';
     import util from '@/libs/util.js';
     import scrollBar from '@/views/my-components/scroll-bar/vue-scroller-bars';
-    
+
     export default {
         components: {
             shrinkableMenu,
@@ -98,7 +99,7 @@
                 isFullScreen: false,
                 openedSubmenuArr: this.$store.state.app.openedSubmenuArr
             };
-        }, 
+        },
         computed: {
             menuList () {
                 return this.$store.state.app.menuList;
@@ -145,17 +146,17 @@
                 this.$store.commit('setMessageCount', 3);
 
             },
-            loginOut(){
+            loginOut () {
 
-                Cookies.remove("userM");
-                Cookies.remove("password");
-                Cookies.remove("token");
-                Cookies.remove("userId");
-                Cookies.remove("access");
-                Cookies.remove("azkaban");
-                Cookies.remove("hue");
-                Cookies.remove("PLAY_SESSION");
-                Cookies.remove("spark.submit")
+                Cookies.remove('userM');
+                Cookies.remove('password');
+                Cookies.remove('token');
+                Cookies.remove('userId');
+                Cookies.remove('access');
+                Cookies.remove('azkaban');
+                Cookies.remove('hue');
+                Cookies.remove('PLAY_SESSION');
+                Cookies.remove('spark.submit');
                 let themeLink = document.querySelector('link[name="theme"]');
                 themeLink.setAttribute('href', '');
                 // 清空打开的页面等数据，但是保存主题数据
@@ -185,7 +186,7 @@
                         name: 'login'
                     });
                 }
-            },  
+            },
             checkTag (name) {
                 let openpageHasTag = this.pageTagsList.some(item => {
                     if (item.name === name) {
@@ -197,7 +198,7 @@
                 }
             },
             handleSubmenuChange (val) {
-                console.log('ddddddd导航',val)
+                console.log('ddddddd导航', val);
             },
             beforePush (name) {
                 // if (name === 'accesstest_index') {
@@ -234,17 +235,17 @@
             }
         },
         mounted () {
-                if (localStorage.getItem('galaxy_child')) {
-                    JSON.parse(localStorage.getItem('galaxy_child')).map(r => {
-                        this.$store.commit("judgeJurisdiction",r.resourceCode)
-                    });
-                }
-
+            if (localStorage.getItem('galaxy_child')) {
+                JSON.parse(localStorage.getItem('galaxy_child')).map(r => {
+                    this.$store.commit('judgeJurisdiction', r.resourceCode);
+                });
+            }
 
             this.init();
             window.addEventListener('resize', this.scrollBarResize);
         },
         created () {
+
             // 显示打开的页面的列表
             this.$store.commit('setOpenedList');
             //本地权限校验没有存储后 会自动跳到登录页
@@ -259,31 +260,10 @@
             if (!sessionStorage.getItem('pagesT')) {
                 if (localStorage.getItem('galaxy_Jurisdiction')) {
                     let Code = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[0].resourceCode;
-                    let CodeOrg = 0;
-                    if (JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[1]) {
-                        CodeOrg = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'))[1].resourceCode;
-                    }
-
-                    if (Code == 'CLUSTER_GRAIL' ) {
-                        this.again_go('focus-large');
-                    } else if ( CodeOrg == 'TASK_WARN') {
-                        this.again_go('task-warning');
-                    } else if (Code == 'TASK_FIND') {
-                        this.again_go('task-inquire');
-                    } else if (Code == 'TASK_RECORD') {
-                        this.again_go('task-table');
-                    } else if (Code == 'SPARK_WORKBENCH') {
-                        this.again_go('spark-table');
-                    } else if (Code == 'HUE_WORKBENCH') {
-                        this.again_go('HUE-table');
-                    } else if (Code == 'METADATA_COMPARE') {
-                        this.again_go('data_com');
-                    } else if (Code == 'AZKABAN') {
-                        this.again_go('task-dispatch');
-                    } else if (Code == 'AUTH') {
-                        this.again_go('add-jurisdiction');
-                    } else if (Code == 'BATCH') {
-                        this.again_go('workflow');
+                    for (var code in this.$store.state.app.code_party) {
+                        if (code == Code) {
+                            this.again_go(this.$store.state.app.code_party.code);
+                        }
                     }
                 }
             }

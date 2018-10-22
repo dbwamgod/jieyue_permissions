@@ -124,6 +124,18 @@
                 },
                 act_name: '2-1',
                 menuListDisplay: [],
+                pathNameObj: {
+                    'focus-large': '2-1',
+                    'task-warning': '2-2',
+                    'task-inquire': '2-3',
+                    'task-table': '2-4',
+                    'spark-table': '2-5',
+                    'HUE-table': '2-6',
+                    'data_com': '2-7',
+                    'task-dispatch': '3-1',
+                    'add-jurisdiction': '4-1',
+                    'workflow': '4-2'
+                },
 
             };
         },
@@ -144,58 +156,22 @@
             // console.log(this.$route, this.act_name);
 
         },
-        created () {
+        watch: {
+            '$route' (to, form) {
+                this.act_name = this.pathNameObj[to.name] || this.pathNameObj[form.name];
+                this.pathNameObj[to.name] && sessionStorage.setItem('pagesT', this.pathNameObj[to.name]);
 
+            }
+        },
+        created () {
             let localQ = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'));
+
             if (localQ.length !== 0) {
                 localQ.forEach(r => {
                     this.menuListDisplay.push(r.resourceName);
+
                 });
 
-                for (let i = 0; i < localQ.length; i++) {
-                    if (localQ[i + 1]) {
-                        if (localQ[i].resourceCode == 'CLUSTER_GRAIL' || localQ[i + 1].resourceCode == 'CLUSTER_GRAIL') {
-                            this.activeName = '2-1';
-                            break;
-                        }
-                    }
-                    if (localQ[i].resourceCode == 'TASK_WARN') {
-                        this.activeName = '2-2';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'TASK_FIND') {
-                        this.activeName = '2-3';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'TASK_RECORD') {
-                        this.activeName = '2-4';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'SPARK_WORKBENCH') {
-                        this.activeName = '2-5';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'HUE_WORKBENCH') {
-                        this.activeName = '2-6';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'METADATA_COMPARE') {
-                        this.activeName = '2-7';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'AZKABAN') {
-                        this.activeName = '3-1';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'AUTH') {
-                        this.activeName = '4-1';
-                        break;
-                    }
-                    else if (localQ[i].resourceCode == 'BATCH') {
-                        this.activeName = '4-2';
-                        break;
-                    }
-                }
                 let homeWork = 0;
                 let dropdowm = 0;
                 for (var variable of this.menuListDisplay) {
@@ -239,14 +215,13 @@
                 }
             }
 
-            this.act_name = sessionStorage.getItem(`pagesT`) ? sessionStorage.getItem(`pagesT`) : '2-1';
+            this.act_name = sessionStorage.getItem(`pagesT`) ?
+                sessionStorage.getItem(`pagesT`) :
+                this.pathNameObj[this.$store.state.app.currentPageName];
 
-            //this.act_name=this.openNames[1];
-            // this.activeName = Cookies.get('pages');
 
         },
         methods: {
-
 
             menuSelect (name) {
 
@@ -271,4 +246,3 @@
         color: white;
     }
 </style>
-

@@ -5,6 +5,18 @@ import Vue from 'vue';
 
 const app = {
     state: {
+        code_party: {
+            CLUSTER_GRAIL: 'focus-large',
+            TASK_WARN: 'task-warning',
+            TASK_FIND: 'task-inquire',
+            TASK_RECORD: 'task-table',
+            SPARK_WORKBENCH: 'spark-table',
+            HUE_WORKBENCH: 'HUE-table',
+            METADATA_COMPARE: 'data_com',
+            AZKABAN: 'task-dispatch',
+            AUTH: 'add-jurisdiction',
+            BATCH: 'workflow',
+        },
         homework: {
             now_status: false,
             before_status: false,
