@@ -103,108 +103,104 @@
                                     }).then(res => {
                                         Cookies.set('party_userId', res.data.principal.id);
                                         this.$axios({
-                                            method: 'get',
-                                            url: api.Resource_permissions()
+                                            method: 'post',
+                                            url: api.Resource_permissions(),
+                                            data:{
+                                                tenantCode:"GALAXY_PLATFORM",
+                                                userId: Cookies.get('party_userId')
+                                            }
                                         }).then((res) => {
-
                                             if (res.data.code == 200) {
-                                                let flag=true
-                                                res.data.data.map(r => {
+                                                if(res.data.data.length){
+                                                    let dataLen = [];
+                                                    res.data.data.map((res, i) => {
+                                                        dataLen.push(res);
+                                                    });
+                                                    localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
+                                                    let disNay = [];
+                                                    let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
+                                                    let resource = [...set];
+                                                    resource.forEach(r => {
+                                                        if (r.child) {
+                                                            r.child.forEach(r => {
+                                                                disNay.push(r);
+                                                            });
+                                                        }
+                                                    });
+                                                    for (let i = 0; i < resource.length; i++) {
 
-                                                    if (r.tenantCode == 'GALAXY_PLATFORM') {
-                                                        flag=false
-                                                        let max = [];
-                                                        var dataLen = [];
-                                                        r.voList.map((res, i) => {
-                                                            dataLen.push(res);
-                                                        });
-
-                                                        localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
-                                                        let disNay = [];
-                                                        let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
-                                                        let resource = [...set];
-                                                        resource.forEach(r => {
-                                                            if (r.child) {
-                                                                r.child.forEach(r => {
-                                                                    disNay.push(r);
-                                                                });
-                                                            }
-                                                        });
-                                                        for (let i = 0; i < resource.length; i++) {
-
-                                                            if (resource[i].resourceCode == 'CLUSTER_GRAIL') {
-                                                                this.login_go('focus-large');
-                                                                break;
-                                                            }
-
-                                                            if (resource[i].resourceCode == 'TASK_WARN') {
-                                                                this.login_go('task-warning');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'TASK_FIND') {
-                                                                this.login_go('task-inquire');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'TASK_RECORD') {
-                                                                this.login_go('task-table');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'SPARK_WORKBENCH') {
-                                                                this.login_go('spark-table');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'HUE_WORKBENCH') {
-                                                                this.login_go('HUE-table');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'METADATA_COMPARE') {
-                                                                this.login_go('data_com');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'AZKABAN') {
-                                                                this.login_go('task-dispatch');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'AUTH') {
-                                                                this.login_go('add-jurisdiction');
-                                                                break;
-                                                            }
-                                                            if (resource[i].resourceCode == 'BATCH') {
-                                                                this.login_go('workflow');
-                                                                break;
-                                                            }
+                                                        if (resource[i].resourceCode == 'CLUSTER_GRAIL') {
+                                                            this.login_go('focus-large');
+                                                            break;
                                                         }
 
-                                                        localStorage.setItem('galaxy_child', JSON.stringify(disNay));
-                                                        this.$axios({//银河平台 if 页面
-                                                            method: 'post',
-                                                            url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
-                                                            data: {
-                                                                userName: this.form.userName,
-                                                                pswd: this.form.password,
-                                                            },
-                                                            headers: {
-                                                                'Content-Type': 'application/json;charset=UTF-8'
-                                                            }
-                                                        }).then(res => {
-
-                                                            Cookies.set('azkaban', res.data.data.azkaban);
-                                                            Cookies.set('hue', res.data.data.hue);
-                                                            Cookies.set('spark.submit', res.data.data['spark.submit']);
-                                                        });
-                                                    } else if(r.tenantCode != 'GALAXY_PLATFORM'&& flag){
-
-                                                        const title = '登录错误';
-                                                        Cookies.remove('userM');
-                                                        Cookies.remove('access');
-                                                        Cookies.remove('tokenY');
-                                                        Cookies.remove('party_userId');
-                                                        this.$Modal.error({
-                                                            title: title,
-                                                            content: '您未开通系统权限, 请联系管理员',
-                                                        });
+                                                        if (resource[i].resourceCode == 'TASK_WARN') {
+                                                            this.login_go('task-warning');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'TASK_FIND') {
+                                                            this.login_go('task-inquire');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'TASK_RECORD') {
+                                                            this.login_go('task-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'SPARK_WORKBENCH') {
+                                                            this.login_go('spark-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'HUE_WORKBENCH') {
+                                                            this.login_go('HUE-table');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'METADATA_COMPARE') {
+                                                            this.login_go('data_com');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'AZKABAN') {
+                                                            this.login_go('task-dispatch');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'AUTH') {
+                                                            this.login_go('add-jurisdiction');
+                                                            break;
+                                                        }
+                                                        if (resource[i].resourceCode == 'BATCH') {
+                                                            this.login_go('workflow');
+                                                            break;
+                                                        }
                                                     }
-                                                });
+                                                    localStorage.setItem('galaxy_child', JSON.stringify(disNay));
+                                                    this.$axios({//银河平台 if 页面
+                                                        method: 'post',
+                                                        url: api.getHueAutoLoginUrl(Cookies.get('tokenY')),
+                                                        data: {
+                                                            userName: this.form.userName,
+                                                            pswd: this.form.password,
+                                                        },
+                                                        headers: {
+                                                            'Content-Type': 'application/json;charset=UTF-8'
+                                                        }
+                                                    }).then(res => {
+
+                                                        Cookies.set('azkaban', res.data.data.azkaban);
+                                                        Cookies.set('hue', res.data.data.hue);
+                                                        Cookies.set('spark.submit', res.data.data['spark.submit']);
+                                                    });
+                                                }else{
+                                                    const title = '登录错误';
+                                                    Cookies.remove('userM');
+                                                    Cookies.remove('access');
+                                                    Cookies.remove('tokenY');
+                                                    Cookies.remove('party_userId');
+                                                    this.$Modal.error({
+                                                        title: title,
+                                                        content: '您未开通系统权限, 请联系管理员',
+                                                    });
+                                                }
+
+
                                             } else {
                                                 const title = '资源错误';
                                                 Cookies.remove('userM');
