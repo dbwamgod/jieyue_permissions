@@ -198,7 +198,7 @@
                 }
             },
             handleSubmenuChange (val) {
-                console.log('ddddddd导航', val);
+                // console.log('ddddddd导航', val);
             },
             beforePush (name) {
                 // if (name === 'accesstest_index') {
