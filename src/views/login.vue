@@ -1,4 +1,4 @@
-<style lang="less">
+<style  lang="less">
     @import "./login.less";
 </style>
 
@@ -67,7 +67,17 @@
                     AZKABAN:"task-dispatch",
                     AUTH:"add-jurisdiction",
                     BATCH:"workflow",
-                }
+                },
+                homework: {
+                    now_status: false,
+                    before_status: false,
+                    early_warn_list: false,
+                    kill_job_task: false,
+                    check_list: false,
+                    log_info: false,
+                    operation_log_info: false,
+                    mysql_list: false,
+                },
             };
         },
         created () {
@@ -210,5 +220,3 @@
     };
 </script>
 
-<style>
-</style>
