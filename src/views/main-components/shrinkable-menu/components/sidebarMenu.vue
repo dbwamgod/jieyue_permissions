@@ -207,18 +207,12 @@
                         this.menuDisplay.fouse = true;
                     }
                 }
-                if (homeWork <= 7) {
-                    this.dropdown.homework = true;
-                }
-                if (dropdowm <= 2) {
-                    this.dropdown.jurisdiction = true;
-                }
+                this.dropdown.homework = homeWork <= 7;
+
+                this.dropdown.jurisdiction = dropdowm <= 2;
             }
 
-            this.act_name = sessionStorage.getItem(`pagesT`) ?
-                sessionStorage.getItem(`pagesT`) :
-                this.pathNameObj[this.$store.state.app.currentPageName];
-
+            this.act_name = sessionStorage.getItem(`pagesT`) ? sessionStorage.getItem(`pagesT`) : this.pathNameObj[this.$store.state.app.currentPageName];
 
         },
         methods: {

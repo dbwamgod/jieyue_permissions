@@ -15,6 +15,7 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 module.exports = merge(webpackBaseConfig, {
     devtool: '#cheap-module-eval-source-map',
     output: {
+
         publicPath: '/platform_party',
         filename: '[name].js',
         chunkFilename: '[name].chunk.js'
@@ -33,17 +34,17 @@ module.exports = merge(webpackBaseConfig, {
             filename: '../index.html',
             inject: false
         }),
-        new CopyWebpackPlugin([
-            {
-                from: 'src/views/main-components/theme-switch/theme'
-            },
-            {
-                from: 'src/views/my-components/text-editor/tinymce'
-            }
-        ], {
-            ignore: [
-                'text-editor.vue'
-            ]
-        })
+        // new CopyWebpackPlugin([
+        //     {
+        //         from: 'src/views/main-components/theme-switch/theme'
+        //     },
+        //     {
+        //         from: 'src/views/my-components/text-editor/tinymce'
+        //     }
+        // ], {
+        //     ignore: [
+        //         'text-editor.vue'
+        //     ]
+        // })
     ]
 });
