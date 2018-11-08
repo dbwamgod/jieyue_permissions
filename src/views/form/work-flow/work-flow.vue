@@ -8,26 +8,26 @@
             <Row type="flex" justify="start" class="code-row-bg">
 
                 <Col span="5">
-                <Form-item label="用户名：">
+                <FormItem label="用户名：">
                     <Select v-model="formItem.userName" placeholder="请选择" >
                         <Option v-for="item in userList" :value="item||''" :key="item">{{ item}}</Option>
                     </Select>
-                </Form-item>
+                </FormItem>
                 </Col>
                 <Col span="5">
-                <Form-item label="库名：">
+                <FormItem label="库名：">
                     <Select v-model="formItem.dbName" placeholder="请选择" >
                         <Option v-for="item in cityList" :value="item.dbName||''" :key="item.dbName">{{ item.dbName}}
                         </Option>
                     </Select>
-                </Form-item>
+                </FormItem>
                 </Col>
                 <Col span="8">
-                <Form-item label="">
-                    <Checkbox-group v-model="formItem.checkbox" >
-                        <Checkbox v-for="item in queryDbPrivilegeList" :label="item.key">{{item.name}}</Checkbox>
-                    </Checkbox-group>
-                </Form-item>
+                <FormItem label="">
+                    <CheckboxGroup v-model="formItem.checkbox" >
+                        <Checkbox v-for="(item,i) in queryDbPrivilegeList" :label="item.key" :key="i">{{item.name}}</Checkbox>
+                    </CheckboxGroup>
+                </FormItem>
                 </Col>
                 <Col span='4'>
                 <Button type="primary" @click='submit' :disabled="!(formItem.input && formItem.checkbox.length)">提交</Button>
@@ -37,10 +37,10 @@
       <Row>
           <Col span="18">
                 <Form  :label-width="60">
-                        <Form-item label="表名：">
+                        <FormItem label="表名：">
                                     <Input v-model="formItem.input" placeholder="输入表明以逗号分隔..."  />
-                        </Form-item>
-                </Form>      
+                        </FormItem>
+                </Form>
           </Col>
       </Row>
         <Modal

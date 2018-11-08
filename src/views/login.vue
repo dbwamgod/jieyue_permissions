@@ -1,4 +1,4 @@
-<style  lang="less">
+<style lang="less">
     @import "./login.less";
 </style>
 
@@ -43,6 +43,7 @@
     import api from '@/api';
 
     export default {
+        inject: ['out'],
         data () {
             return {
                 form: {
@@ -55,17 +56,17 @@
                     ],
                     password: [{required: true, message: '密码不能为空', trigger: 'blur'}]
                 },
-                code_party:{
-                    CLUSTER_GRAIL:"focus-large",
-                    TASK_WARN:"task-warning",
-                    TASK_FIND:"task-inquire",
-                    TASK_RECORD:"task-table",
-                    SPARK_WORKBENCH:"spark-table",
-                    HUE_WORKBENCH:"HUE-table",
-                    METADATA_COMPARE:"data_com",
-                    AZKABAN:"task-dispatch",
-                    AUTH:"add-jurisdiction",
-                    BATCH:"workflow",
+                code_party: {
+                    CLUSTER_GRAIL: 'focus-large',
+                    TASK_WARN: 'task-warning',
+                    TASK_FIND: 'task-inquire',
+                    TASK_RECORD: 'task-table',
+                    SPARK_WORKBENCH: 'spark-table',
+                    HUE_WORKBENCH: 'HUE-table',
+                    METADATA_COMPARE: 'data_com',
+                    AZKABAN: 'task-dispatch',
+                    AUTH: 'add-jurisdiction',
+                    BATCH: 'workflow',
                 },
                 homework: {
                     now_status: false,
@@ -127,33 +128,21 @@
                                         this.$axios({
                                             method: 'post',
                                             url: api.Resource_permissions(),
-                                            data:{
-                                                tenantCode:"GALAXY_PLATFORM",
+                                            data: {
+                                                tenantCode: 'GALAXY_PLATFORM',
                                                 userId: Cookies.get('party_userId')
                                             }
                                         }).then((res) => {
                                             if (res.data.code == 200) {
-                                                if(res.data.data.length){
-                                                    let dataLen = [];
-                                                    res.data.data.map((res, i) => {
-                                                        dataLen.push(res);
-                                                    });
-                                                    localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(dataLen));
+                                                if (res.data.data.length) {
+                                                    localStorage.setItem('galaxy_Jurisdiction', JSON.stringify(res.data.data));
                                                     let disNay = [];
                                                     let set = new Set(JSON.parse(localStorage.getItem('galaxy_Jurisdiction')));
                                                     let resource = [...set];
-                                                    resource.forEach(r => {
-                                                        if (r.child) {
-                                                            r.child.forEach(r => {
-                                                                disNay.push(r);
-                                                            });
-                                                        }
+                                                    resource.forEach((r, i) => {
+                                                        !i && this.login_go(this.code_party[r.resourceCode]);
+                                                        r.child && r.child.length && r.child.forEach(t =>disNay.push(t));
                                                     });
-                                                    for (var code in this.code_party) {
-                                                        if(code==resource[0].resourceCode){
-                                                            this.login_go(this.code_party.code)
-                                                        }
-                                                    }
                                                     localStorage.setItem('galaxy_child', JSON.stringify(disNay));
                                                     this.$axios({//银河平台 if 页面
                                                         method: 'post',
@@ -166,31 +155,21 @@
                                                             'Content-Type': 'application/json;charset=UTF-8'
                                                         }
                                                     }).then(res => {
-
                                                         Cookies.set('azkaban', res.data.data.azkaban);
                                                         Cookies.set('hue', res.data.data.hue);
                                                         Cookies.set('spark.submit', res.data.data['spark.submit']);
                                                     });
-                                                }else{
+                                                } else {
                                                     const title = '登录错误';
-                                                    Cookies.remove('userM');
-                                                    Cookies.remove('access');
-                                                    Cookies.remove('tokenY');
-                                                    Cookies.remove('party_userId');
+                                                    this.out();
                                                     this.$Modal.error({
                                                         title: title,
                                                         content: '您未开通系统权限, 请联系管理员',
                                                     });
                                                 }
-
-
                                             } else {
                                                 const title = '资源错误';
-                                                Cookies.remove('userM');
-                                                Cookies.remove('access');
-                                                Cookies.remove('tokenY');
-                                                Cookies.remove('party_userId');
-
+                                                this.out();
                                                 this.$Modal.error({
                                                     title: title,
                                                     content: res.data.msg,

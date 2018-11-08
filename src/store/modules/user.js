@@ -4,15 +4,22 @@ const user = {
     state: {},
     mutations: {
         logout (state, vm) {
-            Cookies.remove('userM');
-            Cookies.remove('passwordM');
-            Cookies.remove('access');
-            Cookies.remove('azkaban');
-            Cookies.remove('tokenY');
-            Cookies.remove('userId');
-            Cookies.remove('PLAY_SESSION');
-            Cookies.remove('hue');
-            Cookies.remove('spark.submit');
+
+
+            let keys= Object.keys(Cookies());
+            keys.map(r=>{
+                Cookies.remove(r);
+            });
+
+            // Cookies.remove('userM');
+            // Cookies.remove('passwordM');
+            // Cookies.remove('access');
+            // Cookies.remove('azkaban');
+            // Cookies.remove('tokenY');
+            // Cookies.remove('userId');
+            // Cookies.remove('PLAY_SESSION');
+            // Cookies.remove('hue');
+            // Cookies.remove('spark.submit');
             sessionStorage.removeItem(`pagesT`);
             localStorage.removeItem("galaxy_Jurisdiction")
             localStorage.removeItem("galaxy_child")

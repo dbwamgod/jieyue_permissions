@@ -33,7 +33,7 @@
                 <Col span="8">
                 <Form-item label="">
                     <Checkbox-group v-model="formItem.checkbox" @on-change='onHandChange'>
-                        <Checkbox v-for="item in queryDbPrivilegeList" :label="item.key">{{item.name}}</Checkbox>
+                        <Checkbox v-for="(item,i) in queryDbPrivilegeList" :label="item.key" :key="i">{{item.name}}</Checkbox>
                         <!-- <Checkbox label="全库添加"></Checkbox>
                         <Checkbox label="全库修改"></Checkbox>
                         <Checkbox label="全库删除"></Checkbox> -->

@@ -9,13 +9,18 @@
     import Cookies from 'js-cookie';
 
     export default {
+        provide () {
+            return {
+                reload: this.reload,
+                out: this.out
+            };
+        },
         data () {
             return {
                 theme: this.$store.state.app.themeColor
             };
         },
         created () {
-
 
             Array.prototype.remove = function (val) {
                 let index = this.indexOf(val);
@@ -28,8 +33,12 @@
         beforeDestroy () {
         },
         methods: {
-
-
+            out () {
+                let keys = Object.keys(Cookies());
+                keys.map(r => {
+                    Cookies.remove(r);
+                });
+            }
         }
     };
 </script>
