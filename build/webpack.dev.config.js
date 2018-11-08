@@ -15,8 +15,7 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 module.exports = merge(webpackBaseConfig, {
     devtool: '#cheap-module-eval-source-map',
     output: {
-
-        publicPath: '/platform_party',
+        publicPath: '/platform_party/',
         filename: '[name].js',
         chunkFilename: '[name].chunk.js'
     },
