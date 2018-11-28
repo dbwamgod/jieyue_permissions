@@ -4,7 +4,7 @@
 
 <template>
     <Menu ref="sideMenu" :active-name="act_name" :open-names="openName" :theme="menuTheme" width="auto"
-          @on-select="menuSelect" class="menu-label" :accordion="true">
+          @on-select="menuSelect" class="menu-label" >
 
         <Submenu name="2" v-if="dropdown.homework">
             <template slot="title">
@@ -75,7 +75,7 @@
         name: 'sidebarMenu',
         data () {
             return {
-                openName:["2","3","4"],
+                openName:["2"],
                 menuDisplay: {
                     'CLUSTER_GRAIL': false,
                     'TASK_WARN': false,
@@ -135,7 +135,7 @@
                 r.resourceCode === 'AUTH' || 'BATCH' ? this.dropdown.jurisdiction = true : '';
             });
             this.act_name = sessionStorage.getItem(`pagesT`) ? sessionStorage.getItem(`pagesT`) : this.pathNameObj[this.$store.state.app.currentPageName];
-
+            this.openName=[this.pathNameObj[this.$store.state.app.currentPageName][0]]//多菜单下的菜单列表异常新鲜事
         },
         methods: {
             menuSelect (name) {
