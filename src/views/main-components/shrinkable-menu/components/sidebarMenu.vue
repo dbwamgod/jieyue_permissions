@@ -3,8 +3,8 @@
 </style>
 
 <template>
-    <Menu ref="sideMenu" :active-name="act_name" :open-names="['2']" :theme="menuTheme" width="auto"
-          @on-select="menuSelect" class="menu-label">
+    <Menu ref="sideMenu" :active-name="act_name" :open-names="openName" :theme="menuTheme" width="auto"
+          @on-select="menuSelect" class="menu-label" :accordion="true">
 
         <Submenu name="2" v-if="dropdown.homework">
             <template slot="title">
@@ -75,6 +75,7 @@
         name: 'sidebarMenu',
         data () {
             return {
+                openName:["2","3","4"],
                 menuDisplay: {
                     'CLUSTER_GRAIL': false,
                     'TASK_WARN': false,
@@ -122,7 +123,8 @@
             '$route' (to, form) {
                 this.act_name = this.pathNameObj[to.name] || this.pathNameObj[form.name];
                 this.pathNameObj[to.name] && sessionStorage.setItem('pagesT', this.pathNameObj[to.name]);
-            }
+            },
+
         },
         created () {
             let localQ = JSON.parse(localStorage.getItem('galaxy_Jurisdiction'));
