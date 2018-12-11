@@ -1,4 +1,4 @@
-const _baseT = 'http://172.18.101.118:10000';
+const _baseT = 'http://stg.bdc.jieyue.com/api';
 const _baseUrlQ = _baseT+'/galaxy-platform-management';
 
 
